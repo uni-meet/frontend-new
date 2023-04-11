@@ -1,0 +1,23 @@
+{
+  "name": "frontend-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uni-meet/frontend-new.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uni-meet/frontend-new/issues"
+  },
+  "homepage": "https://github.com/uni-meet/frontend-new#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
+  }
+}
