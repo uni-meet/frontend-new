@@ -37,7 +37,7 @@ export function signup(signupCredentials: ISignupCredentials) {
             createToken(token);
         })
 }
-//  return fetch(CURRENT_SERVER + `/user/getInfo/${id}`
+//  return fetch(CURRENT_SERVER + `/user/getInfo/${id}` correct way to declare id
 export function getUserInfo() {
     return fetch(CURRENT_SERVER + `/user/getUserInfo/${userId}`, {
         method: 'GET',
