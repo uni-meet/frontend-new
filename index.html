@@ -20,10 +20,48 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="search" placeholder="Search for creator,inspiration and projects">
             </div>
-            
-                <div class="profile-photo">
-                    <img src="images/profile-1.png">
+            <div class="wrapper">
+                <input id="toggler" type="checkbox">
+                <label for="toggler">
+                  <img src="images/profile-1.png" style="height: 40px; width: 50px;" alt="Dropdown">
+                </label>
+                <div class="dropdown">
+                  <a href="">View Profile</a>
+                  <a href="">Feedback and Support</a>
+                  <a href="">Setting</a>
+                  <a href="">Logout</a>
                 </div>
+              </div>
+              
+              <style>
+              .wrapper {
+                position: relative;
+                text-align: center;
+              }
+              input {
+                opacity: 0;
+                pointer-events: none;
+                touch-action: none;
+              }
+              .dropdown {
+                display: none;
+                width: 300px;
+                position: absolute;
+                top: calc(100% + 10px);
+                flex-direction: column;
+                background-color: white;
+                border: 1px solid white;
+                padding: 20px;
+                gap: 5px;
+                right: 0;
+              }
+              input:checked ~ .dropdown {
+                display: flex;
+              }
+              </style>
+            </div>
+
+               <br><br>
             
         </nav>
     </section>
