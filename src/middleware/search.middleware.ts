@@ -1,4 +1,4 @@
-import { CURRENT_SERVER } from "./server.middleware";
+import { CURRENT_SERVER } from './server.middleware';
 
 export function searchUsers(searchString: string) {
     return fetch(CURRENT_SERVER + '/search', {
@@ -8,8 +8,8 @@ export function searchUsers(searchString: string) {
             searchString: searchString
         })
     })
-        .then(res => {
-            if (res.ok) return res.json();
-            throw new Error('Searching users failed');
-        })
+    .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Searching users failed');
+    })
 }

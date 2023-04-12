@@ -39,7 +39,7 @@ export function signup(signupCredentials: ISignupCredentials) {
 }
 //  return fetch(CURRENT_SERVER + `/user/getInfo/${id}`
 export function getUserInfo() {
-    return fetch(CURRENT_SERVER + `/user/getInfo/${userId}`, {
+    return fetch(CURRENT_SERVER + '/user/getInfo/${userId}', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
