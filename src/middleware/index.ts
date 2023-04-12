@@ -1,3 +1,3 @@
 export * from './user.middleware';
-export * from './friend';
-export * from './search';
+export * from './picture.middleware';
+export * from './search.middleware';
