@@ -3,41 +3,96 @@
 <head>
 	<title>Slide Navbar</title>
 	<link rel="stylesheet" type="text/css" href="login.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.4.3/typescript.min.js"></script>
 </head>
 <body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
 
+        <div class="signup">
+            <form>
+                <h1 style="text-align: center; color: white;">UniGram</h1>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="txt" id="signupUsername" placeholder="User name" required="">
+                <input type="email" name="email" id="signupEmail" placeholder="Email" required="">
+                <input type="password" name="pswd" id="signupPassword" placeholder="Password" required="">
+                <button id="signupButton">Sign up</button>
+            </form>
+        </div>
 
+        <div class="login">
+            <form>
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" name="email" id="loginEmail" placeholder="Email" required="">
+                <input type="password" name="pswd" id="loginPassword" placeholder="Password" required="">
+                <button id="loginButton">Login</button>
+            </form>
+        </div>
+    </div>
     
-
-	<div class="main">  	
-
-       
-            
-
-		<input type="checkbox" id="chk" aria-hidden="true">
-
-    
-
-			<div class="signup">
-				<form>
-                    <h1 style="text-align: center; color: white;">UniGram</h1>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Sign up</button>
-				</form>
-			</div>
-
-			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Login</button>
-				</form>
-			</div>
-	</div>
+    <script type="text/typescript">
+		const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
+	
+		// User Login
+		async function loginUser(email: string, password: string) {
+		  try {
+			const response = await fetch(CURRENT_SERVER_API + "/auth/login", {
+			  method: "POST",
+			  headers: { "Content-Type": "application/json" },
+			  body: JSON.stringify({ email, password }),
+			});
+	
+			if (response.ok) {
+			  const data = await response.json();
+			  console.log("Logged in:", data);
+			} else {
+			  throw new Error("Login failed");
+			}
+		  } catch (error) {
+			console.error(error);
+		  }
+		}
+	
+		// User Sign Up
+		async function signUpUser(username: string, email: string, password: string) {
+		  try {
+			const response = await fetch(CURRENT_SERVER_API + "/auth/register", {
+			  method: "POST",
+			  headers: { "Content-Type": "application/json" },
+			  body: JSON.stringify({ username, email, password }),
+			});
+	
+			if (response.ok) {
+			  const data = await response.json();
+			  console.log("Signed up:", data);
+			} else {
+			  throw new Error("Sign up failed");
+			}
+		  } catch (error) {
+			console.error(error);
+		  }
+		}
+	
+		// Event handlers
+		function handleLogin() {
+		  const email = (document.getElementById('loginEmail') as HTMLInputElement).value;
+		  const password = (document.getElementById('loginPassword') as HTMLInputElement).value;
+	
+		  loginUser(email, password);
+		}
+	
+		function handleSignUp() {
+		  const username = (document.getElementById('signupUsername') as HTMLInputElement).value;
+		  const email = (document.getElementById('signupEmail') as HTMLInputElement).value;
+		  const password = (document.getElementById('signupPassword') as HTMLInputElement).value;
+	
+		  signUpUser(username, email, password);
+		}
+	
+		// Add event listeners for login and sign up buttons
+		document.getElementById('loginButton').addEventListener('click', handleLogin);
+		document.getElementById('signupButton').addEventListener('click', handleSignUp);
+	  </script>
 </body>
 </html>

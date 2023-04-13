@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Unigram</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
@@ -26,10 +26,10 @@
                   <img src="images/profile-1.png" style="height: 40px; width: 50px;" alt="Dropdown">
                 </label>
                 <div class="dropdown">
-                  <a href="">View Profile</a>
+                  <a href="" onclick="testGetUserInfo()">View Profile</a>
                   <a href="">Feedback and Support</a>
                   <a href="">Setting</a>
-                  <a href="">Logout</a>
+                  <a href="login.html">Logout</a>
                 </div>
               </div>
               
@@ -394,6 +394,83 @@
 
 
 <script src="app.js"></script>
+
+<script type="module">
+    import { searchUsers } from './search.middleware.js';
+    import { sharePicture, updatePictureCaption, deletePicture } from './picture.middleware.js';
+
+    async function testSearchUsers() {
+        try {
+            const searchString = "user";
+            const users = await searchUsers(searchString);
+            console.log(users);
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+    async function testSharePicture() {
+        // Add a file input element to your HTML to test file uploads
+        const fileInput = document.getElementById("pictureImage");
+        const pictureInfo = {
+            userId: "some_user_id",
+            description: "A beautiful picture",
+            pictureImage: fileInput.files[0],
+        };
+        try {
+            await sharePicture(pictureInfo);
+            console.log("Picture shared successfully");
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+    async function testUpdatePictureCaption() {
+        try {
+            const pictureId = "some_picture_id";
+            const caption = "Updated caption";
+            await updatePictureCaption(pictureId, caption);
+            console.log("Caption updated successfully");
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+    async function testDeletePicture() {
+        try {
+            const pictureId = "some_picture_id";
+            await deletePicture(pictureId);
+            console.log("Picture deleted successfully");
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+    async function testGetUserInfo() {
+            try {
+                const userId = "some_user_id";
+                const userInfo = await getUserInfo(userId);
+                console.log(userInfo);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        
+    async function testGetAllPosts() {
+        try {
+                const allPosts = await getAllPosts();
+                console.log(allPosts);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+</script>
+
+<button onclick="testSearchUsers()">Search Users</button>
+<input type="file" id="pictureImage" />
+<button onclick="testSharePicture()">Share Picture</button>
+<button onclick="testUpdatePictureCaption()">Update Picture Caption</button>
+<button onclick="testDeletePicture()">Delete Picture</button>
+<button onclick="testGetAllPosts()">Get All Posts</button>
 
 </body>
 </html>
