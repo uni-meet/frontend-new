@@ -1,9 +1,9 @@
-import { CURRENT_SERVER } from './server.middleware';
+import { CURRENT_SERVER_API } from './server.middleware';
 import { createToken } from '../utils/token.util';
 import { ISignupCredentials, ILoginCredentials, IUserGeneralInfo, IUserPasswordInfo } from '../interfaces/user_interface';
 
 export function login(loginCredentials: ILoginCredentials) {
-    return fetch(CURRENT_SERVER + '/login', {
+    return fetch(CURRENT_SERVER_API + '/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export function login(loginCredentials: ILoginCredentials) {
 
 
 export function signup(signupCredentials: ISignupCredentials) {
-    return fetch(CURRENT_SERVER + '/signup', {
+    return fetch(CURRENT_SERVER_API + '/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export function signup(signupCredentials: ISignupCredentials) {
 }
 //  return fetch(CURRENT_SERVER + `/user/getInfo/${id}`
 export function getUserInfo() {
-    return fetch(CURRENT_SERVER + '/user/getInfo/${userId}', {
+    return fetch(CURRENT_SERVER_API + '/user/getInfo/${userId}', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
@@ -55,7 +55,7 @@ export function getUserInfo() {
 }
 
 export function getUserName() {
-    return fetch(CURRENT_SERVER + '/user/getUserUserName/${userId}', {
+    return fetch(CURRENT_SERVER_API + '/user/getUserUserName/${userId}', {
         method: 'GET',
         headers: {
 
@@ -73,7 +73,7 @@ export function getUserName() {
 
 
 export function updateUserInfo(userGeneralInfo: IUserGeneralInfo) {
-    return fetch(CURRENT_SERVER + '/user/updateUserInfo', {
+    return fetch(CURRENT_SERVER_API + '/user/updateUserInfo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(userGeneralInfo),
@@ -85,7 +85,7 @@ export function updateUserInfo(userGeneralInfo: IUserGeneralInfo) {
 }
 
 export function updateUserPassword(userPasswordInfo: IUserPasswordInfo) {
-    return fetch(CURRENT_SERVER + '/user/updateUserPassword', {
+    return fetch(CURRENT_SERVER_API + '/user/updateUserPassword', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(userPasswordInfo),
@@ -97,7 +97,7 @@ export function updateUserPassword(userPasswordInfo: IUserPasswordInfo) {
 }
 
 export function deleteUser() {
-    return fetch(CURRENT_SERVER + '/user/deleteUser/${userId}', {
+    return fetch(CURRENT_SERVER_API + '/user/deleteUser/${userId}', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
     })
@@ -107,7 +107,7 @@ export function deleteUser() {
         })
 }
 export function getAllPosts() {
-    return fetch(CURRENT_SERVER + '/users-posts', {
+    return fetch(CURRENT_SERVER_API + '/users-posts', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', },
     })

@@ -1,7 +1,7 @@
-import { CURRENT_SERVER } from './server.middleware';
+import { CURRENT_SERVER_API } from './server.middleware';
 
 export function searchUsers(searchString: string) {
-    return fetch(CURRENT_SERVER + '/search', {
+    return fetch(CURRENT_SERVER_API + '/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
