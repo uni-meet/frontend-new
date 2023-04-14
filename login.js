@@ -12,6 +12,9 @@ async function loginUser(username, password) {
         if (response.ok) {
             const data = await response.json();
             console.log("Logged in:", data);
+
+            // Redirect to the index.html page
+            window.location.href = 'index.html';
         } else {
             const errorData = await response.json();
             console.error("Server error:", errorData);
