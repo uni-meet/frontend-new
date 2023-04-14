@@ -27,26 +27,31 @@ async function loginUser(email, password) {
   }
 
 // User Sign Up
-async function signUpUser(firstName, lastName, username, email, password) {
+async function signUpUser(username, email, password) {
     try {
-        const response = await fetch(CURRENT_SERVER_API + "/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ firstName, lastName, username, email, password }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Signed up:", data);
-        } else {
-            const errorText = await response.text();
-            console.error('Server error:', errorText);
-            throw new Error("User already exists");
-        }
+      const response = await fetch(CURRENT_SERVER_API + "/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Signed up:", data);
+        alert("Signup successful!"); // Added alert for successful signup
+  
+        // Redirect to index.html after successful signup (optional)
+        window.location.href = "index.html";
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Signup failed");
+      }
     } catch (error) {
-        console.error(error);
+      console.error(error);
+      alert("Signup failed: " + error.message); // Alert user about the signup failure
     }
-}
+  }
+  
 
 // Event handlers
 function handleLogin() {
