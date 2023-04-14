@@ -27,18 +27,18 @@ async function loginUser(username, password) {
   }
 
 // User Sign Up
-async function signUpUser(username, email, password) {
+async function signUpUser(firstName, lastName, username, email, password) {
     try {
-      const response = await fetch(CURRENT_SERVER_API + "/register", {
+      const response = await fetch(CURRENT_SERVER_API + "/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ firstName, lastName, username, email, password }),
       });
   
       if (response.ok) {
         const data = await response.json();
         console.log("Signed up:", data);
-        alert("Signup successful!"); // Added alert for successful signup
+        alert("Signup successful!");
   
         // Redirect to index.html after successful signup (optional)
         window.location.href = "index.html";
@@ -48,10 +48,9 @@ async function signUpUser(username, email, password) {
       }
     } catch (error) {
       console.error(error);
-      alert("Signup failed: " + error.message); // Alert user about the signup failure
+      alert("Signup failed: " + error.message);
     }
   }
-  
 
 // Event handlers
 function handleLogin() {
