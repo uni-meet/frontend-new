@@ -106,6 +106,7 @@ export function deleteUser() {
             throw new Error('User not found');
         })
 }
+
 export function getAllPosts() {
     return fetch(CURRENT_SERVER_API + '/users-posts', {
         method: 'GET',
@@ -117,6 +118,9 @@ export function getAllPosts() {
         })
 }
 
+export function logOut() {
+    sessionStorage.removeItem('token');
+}
 
 
 
