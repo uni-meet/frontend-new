@@ -1,29 +1,30 @@
 "use strict";
 const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
 // User Login
-async function loginUser(username, password) {
+async function loginUser(email, password) {
     try {
-        const response = await fetch(CURRENT_SERVER_API + "/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Logged in:", data);
-
-            // Redirect to the index.html page
-            window.location.href = 'index.html';
-        } else {
-            const errorData = await response.json();
-            console.error("Server error:", errorData);
-            throw new Error("Login failed");
-        }
+      const response = await fetch(CURRENT_SERVER_API + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Logged in:", data);
+        alert("Login successful!"); // Added alert for successful login
+  
+        // Redirect to index.html after successful login (optional)
+        window.location.href = "index.html";
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
+      }
     } catch (error) {
-        console.error(error);
+      console.error(error);
+      alert("Login failed: " + error.message); // Alert user about the login failure
     }
-}
+  }
 
 // User Sign Up
 async function signUpUser(firstName, lastName, username, email, password) {
