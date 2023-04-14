@@ -1,12 +1,12 @@
 "use strict";
 const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
 // User Login
-async function loginUser(email, password) {
+async function loginUser(username, password) {
     try {
       const response = await fetch(CURRENT_SERVER_API + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
   
       if (response.ok) {
@@ -57,9 +57,9 @@ async function signUpUser(username, email, password) {
 function handleLogin() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
-
+  
     loginUser(username, password);
-}
+  }
 function handleSignUp() {
     const firstName = document.getElementById('signupFirstName').value;
     const lastName = document.getElementById('signupLastName').value;
