@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Slide Navbar</title>
     <link rel="stylesheet" type="text/css" href="login.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="main">
         <input type="checkbox" id="chk" aria-hidden="true">
 
         <div class="signup">
-			<form>
-				<h1 style="text-align: center; color: white;">UniGram</h1>
-				<label for="chk" aria-hidden="true">Sign up</label>
-				<input type="text" name="txt" id="signupFirstName" placeholder="First name" required="">
-				<input type="text" name="txt" id="signupLastName" placeholder="Last name" required="">
-				<input type="text" name="txt" id="signupUsername" placeholder="User name" required="">
-				<input type="email" name="email" id="signupEmail" placeholder="Email" required="">
-				<input type="password" name="pswd" id="signupPassword" placeholder="Password" required="">
-				<button id="signupButton">Sign up</button>
-			</form>
-		</div>
+            <form>
+                <h1 style="text-align: center; color: white;">UniGram</h1>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="txt" id="signupFirstName" placeholder="First name" required="">
+                <input type="text" name="txt" id="signupLastName" placeholder="Last name" required="">
+                <input type="text" name="txt" id="signupUsername" placeholder="User name" required="">
+                <input type="email" name="email" id="signupEmail" placeholder="Email" required="">
+                <input type="password" name="pswd" id="signupPassword" placeholder="Password" required="">
+                <button id="signupButton">Sign up</button>
+            </form>
+        </div>
 
         <div class="login">
             <form>
@@ -33,5 +35,7 @@
     </div>
 
     <script type="module" crossorigin="anonymous" src="login.js" defer></script>
+    <script type="module" crossorigin="anonymous" src="user.middleware" defer></script>
 </body>
+
 </html>

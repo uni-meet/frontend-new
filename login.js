@@ -1,4 +1,8 @@
 "use strict";
+
+import { get } from "http";
+import { getUserInfo } from "./src/middleware/user.middleware";
+
 const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
 // token
 export function createToken(token) {
@@ -65,20 +69,22 @@ async function signUpUser(firstName, lastName, username, email, password) {
 
 // Event handlers
 function handleLogin() {
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
 
-    loginUser(username, password);
-  }
+  loginUser(username, password);
+}
 function handleSignUp() {
-    const firstName = document.getElementById('signupFirstName').value;
-    const lastName = document.getElementById('signupLastName').value;
-    const username = document.getElementById('signupUsername').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
+  const firstName = document.getElementById('signupFirstName').value;
+  const lastName = document.getElementById('signupLastName').value;
+  const username = document.getElementById('signupUsername').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
 
-    signUpUser(firstName, lastName, username, email, password);
+  signUpUser(firstName, lastName, username, email, password);
 }
 // Add event listeners for login and sign up buttons
 document.getElementById('loginButton').addEventListener('click', handleLogin);
 document.getElementById('signupButton').addEventListener('click', handleSignUp);
+
+document.getElementsByClassName('handdle').addEventListener('click', getUserInfo());
