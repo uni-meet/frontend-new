@@ -19,7 +19,18 @@ export function login(loginCredentials: ILoginCredentials) {
             // sessionStorage.setItem(token, 'token');   // TODO: Implement token save
         })
 }
-
+//  export function handleLogin() {
+//     const usernameInput = document.getElementById('loginUsername') as HTMLInputElement;
+//     const passwordInput = document.getElementById('loginPassword') as HTMLInputElement;
+//     const username = usernameInput.value;
+//     const password = passwordInput.value;
+//     const loginCredentials: ILoginCredentials = {
+//         username,
+//         password
+//     }
+//     login(loginCredentials);
+// }
+// document.getElementById('loginButton').addEventListener('click', handleLogin);
 
 export function signup(signupCredentials: ISignupCredentials) {
     return fetch(CURRENT_SERVER_API + '/signup', {
