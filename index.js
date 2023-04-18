@@ -119,7 +119,24 @@ async function updateProfile() {
     }
   }
 
+
+  async function updateUserInfo(token) {
+    try {
+      const userInfo = await getUserInfo(token);
+      const usernameElement = document.querySelector('.handdle h4');
+      if (usernameElement) {
+        usernameElement.textContent = userInfo.username;
+      }
+    } catch (error) {
+      console.error('Error updating user info:', error);
+    }
+  }
+
   window.addEventListener("userLoggedIn", updateProfile);
 
+  const token = getToken(); // Get the token from session storage
+if (token) {
+  updateUserInfo(token);
+}
 // Call this function to display all posts when the page loads
 displayAllPosts();
