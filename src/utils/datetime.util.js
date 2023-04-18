@@ -1,4 +1,4 @@
-export function calculateTimeElapsed(date: Date) {
+export function calculateTimeElapsed(date) {
     let millisecondsElapsed = new Date().getTime() - new Date(date).getTime();
     let seconds = Math.floor(millisecondsElapsed / 1000);
     let minutes = Math.floor(millisecondsElapsed / (1000 * 60));

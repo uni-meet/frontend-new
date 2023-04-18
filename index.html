@@ -168,8 +168,10 @@
                         <img src="images/profile-1.png">
                     </div>
                     <div class="create-post-input">
-                        <textarea placeholder="What's on your mind" rows="5" class="create-post"></textarea>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
+                        <input type="file" id="postImage" accept="images/*" style="display:none;" />
+                        <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
+                        <button type="submit" class="btn btn-primary" id="postButton">Post</button>
                     </div>
                 </form>                            
                 <div class="feeds">
@@ -398,75 +400,7 @@
 
 <script src="app.js"></script>
 
-<script type="module">
-    import { searchUsers } from './search.middleware.ts';
-import { sharePicture, updatePictureCaption, deletePicture } from './picture.middleware.ts';
-
-async function testSearchUsers() {
-    try {
-        const searchString = "user";
-        const users = await searchUsers(searchString);
-        console.log(users);
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-
-async function testSharePicture() {
-    // Add a file input element to your HTML to test file uploads
-    const fileInput = document.getElementById("pictureImage");
-    const pictureInfo = {
-        userId: "some_user_id",
-        description: "A beautiful picture",
-        pictureImage: fileInput.files[0],
-    };
-    try {
-        await sharePicture(pictureInfo);
-        console.log("Picture shared successfully");
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-
-async function testUpdatePictureCaption() {
-    try {
-        const pictureId = "some_picture_id";
-        const caption = "Updated caption";
-        await updatePictureCaption(pictureId, caption);
-        console.log("Caption updated successfully");
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-
-async function testDeletePicture() {
-    try {
-        const pictureId = "some_picture_id";
-        await deletePicture(pictureId);
-        console.log("Picture deleted successfully");
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-async function testGetUserInfo() {
-    try {
-        const userId = "some_user_id";
-        const userInfo = await getUserInfo(userId);
-        console.log(userInfo);
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-        
-async function testGetAllPosts() {
-    try {
-        const allPosts = await getAllPosts();
-        console.log(allPosts);
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-</script>
+<script type="module" src="index.js"></script>
 
 
 </body>
