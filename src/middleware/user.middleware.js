@@ -1,6 +1,5 @@
 import { CURRENT_SERVER_API } from './server.middleware.js';
 import { createToken, getToken } from '../utils/token.util.js';
-const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
 
 export function login(loginCredentials) {
      return fetch(CURRENT_SERVER_API + '/login', {
