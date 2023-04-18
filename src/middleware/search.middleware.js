@@ -1,4 +1,4 @@
-import { CURRENT_SERVER_API } from './server.middleware';
+import { CURRENT_SERVER_API } from './server.middleware.js';
 
 export function searchUsers(searchString) {
     return fetch(CURRENT_SERVER_API + '/search', {

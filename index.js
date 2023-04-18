@@ -1,6 +1,6 @@
-import { getAllPosts, getUserInfo } from './src/middleware/user.middleware.js';
+import { getAllPosts, getUserInfo } from './src/middleware/index.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
-import { getToken } from './src/utils/token.util.js';
+import { getToken } from './src/utils/index.js';
 
 
 const addImageButton = document.getElementById("addImageButton");

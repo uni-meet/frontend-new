@@ -1,5 +1,5 @@
 
-import { CURRENT_SERVER_API } from "./server.middleware";
+import { CURRENT_SERVER_API } from "./server.middleware.js";
 
 export function sharePicture(pictureInfo) {
     let formData = new FormData();
