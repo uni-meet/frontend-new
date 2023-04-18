@@ -390,7 +390,7 @@ main .container .left .profile{
     cursor: pointer;
     align-self: flex-end;
   }
-  
+
 
 .middle .feeds .feed{
     background: var(--color-white);

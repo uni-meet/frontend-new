@@ -68,17 +68,35 @@ async function displayAllPosts() {
         postContainer.innerHTML = '';
         posts.forEach(post => {
             postContainer.innerHTML += `
-                <div class="post">
-                    <div class="post-header">
-                        <img src="${post.user?.profileImage || 'images/profile-1.png'}" alt="Profile image">
-                        <div>
-                            <h5>${post.user?.username || 'Unknown User'}</h5>
-                            <small>${post.createdAt || 'Unknown Date'}</small>
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-photo">
+                                <img src="${post.user?.profileImage || 'images/profile-1.png'}" alt="Profile image">
+                            </div>
+                            <div class="ingo">
+                                <h3>${post.user?.username || 'Unknown User'}</h3>
+                            </div>
+                        </div>
+                        <span class="edit">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </span>
+                    </div>
+                    <div class="photo">
+                        <img src="${post.pictureImage || 'images/night.jpeg'}" alt="Post image">
+                    </div>
+                    <div class="action-buttons">
+                        <div class="interaction-buttons">
+                            <span><i class="fa-solid fa-heart"></i></span>
+                            <span><i class="fa-solid fa-comment-dots"></i></span>
+                            <span><i class="fa-solid fa-share-nodes"></i></span>
+                        </div>
+                        <div class="bookmark">
+                            <span><i class="fa-solid fa-bookmark"></i></span>
                         </div>
                     </div>
-                    <div class="post-content">
-                        <p>${post.description || ''}</p>
-                        <img src="${post.pictureImage || 'images/night.jpeg'}" alt="Post image">
+                    <div class="caption">
+                        <p><b>${post.user?.username || 'Unknown User'}</b> ${post.description || ''}<span class="harsh-tag">#night</span></p>
                     </div>
                 </div>
             `;
@@ -87,6 +105,8 @@ async function displayAllPosts() {
         console.log('Error fetching all posts:', error);
     }
 }
+
+
 
 
 // Call this function to display all posts when the page loads
