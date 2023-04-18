@@ -164,6 +164,9 @@ if (token) {
   updateUserInfo(token);
 }
 
-const newPostData = await createPost(token, user.userId, postDescription, image); // Replace 'image' with the actual image data
+const newPostData = await createPost(token, user.userId, postDescription, image);
+
+const response = await fetch(CURRENT_SERVER_API + "/user/getInfo/" + token);
+console.log("Server response:", await response.text());
 // Call this function to display all posts when the page loads
 await displayAllPosts();
