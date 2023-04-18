@@ -26,7 +26,7 @@ async function loginUser(username, password) {
       
       // Save the user ID and token for future use
       setUserId(data.userId); // Replace this line with your own implementation
-      setToken(data.token); // Replace this line with your own implementation
+      createToken(data.token); // Use the createToken function to set the token
       
       alert("Login successful!"); // Added alert for successful login
 
