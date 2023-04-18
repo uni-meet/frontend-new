@@ -106,6 +106,31 @@ async function displayAllPosts() {
     }
 }
 
+async function createPost(token, userId, description, image) {
+    try {
+      const response = await fetch(CURRENT_SERVER_API + "/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId, description, image }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Post created:", data);
+        return data;
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Post creation failed");
+      }
+    } catch (error) {
+      console.error("Post creation failed:", error);
+      throw error;
+    }
+  }
+
 async function updateProfile() {
     try {
       const token = getToken();
@@ -138,5 +163,7 @@ async function updateProfile() {
 if (token) {
   updateUserInfo(token);
 }
+
+const newPostData = await createPost(token, user.userId, postDescription, image); // Replace 'image' with the actual image data
 // Call this function to display all posts when the page loads
-displayAllPosts();
+await displayAllPosts();
