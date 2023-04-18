@@ -17,21 +17,21 @@ postImageInput.addEventListener("change", (event) => {
 });
 
 document.getElementById('postButton').addEventListener('click', async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  const token = getToken();
-  const user = await getUserInfo(token);
-  const username = user.username;
-  const postDescription = document.getElementById('postDescription').value;
+    const token = getToken();
+    const user = await getUserInfo(token);
+    const username = user.username;
+    const postDescription = document.getElementById('postDescription').value;
 
-  try {
-    await sharePicture({ userId: username, description: postDescription, pictureImage: selectedImage });
-    // After successful post creation, you can refresh the posts on the page
-    // by calling a function that fetches and displays all the posts.
-    displayAllPosts();
-  } catch (error) {
-    console.log('Error sharing picture:', error);
-  }
+    try {
+        await sharePicture({ userId: username, description: postDescription });
+        // After successful post creation, you can refresh the posts on the page
+        // by calling a function that fetches and displays all the posts.
+        displayAllPosts();
+    } catch (error) {
+        console.log('Error sharing picture:', error);
+    }
 });
 
 async function displayAllPosts() {
