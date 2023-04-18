@@ -1,5 +1,5 @@
 import { CURRENT_SERVER_API } from './server.middleware.js';
-import { createToken } from '../utils/token.util.js';
+import { createToken, getToken } from '../utils/token.util.js';
 
 export function login(loginCredentials) {
      return fetch(CURRENT_SERVER_API + '/login', {
