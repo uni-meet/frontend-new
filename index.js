@@ -106,8 +106,20 @@ async function displayAllPosts() {
     }
 }
 
+async function updateProfile() {
+    try {
+      const token = getToken();
+      if (token) {
+        const user = await getUserInfo(token);
+        const profileName = document.querySelector(".left .handdle h4");
+        profileName.textContent = user.username;
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  }
 
-
+  window.addEventListener("userLoggedIn", updateProfile);
 
 // Call this function to display all posts when the page loads
 displayAllPosts();
