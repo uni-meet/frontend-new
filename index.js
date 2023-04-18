@@ -1,36 +1,37 @@
-import {  getAllPosts, getUserInfo } from './middleware/user.middleware.js';
-import { sharePicture } from './middleware/picture.middleware.js';
-import { getToken } from './utils/token.util.js';
+import { getAllPosts, getUserInfo } from './middleware/user.middleware';
+import { sharePicture } from './middleware/picture.middleware';
+import { getToken } from './utils';
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
+let selectedImage;
 
 addImageButton.addEventListener("click", () => {
   postImageInput.click();
 });
 
-/*
-document.getElementById('addImageButton').addEventListener('click', () => {
-    document.getElementById('postImage').click();
+postImageInput.addEventListener("change", (event) => {
+  if (event.target.files.length > 0) {
+    selectedImage = event.target.files[0];
+  }
 });
-*/
+
 document.getElementById('postButton').addEventListener('click', async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const token = getToken();
-    const user = await getUserInfo(token);
-    const username = user.username;
-    const postDescription = document.getElementById('postDescription').value;
-    const postImage = document.getElementById('postImage').files[0];
+  const token = getToken();
+  const user = await getUserInfo(token);
+  const username = user.username;
+  const postDescription = document.getElementById('postDescription').value;
 
-    try {
-        await sharePicture({ userId: username, description: postDescription, pictureImage: postImage });
-        // After successful post creation, you can refresh the posts on the page
-        // by calling a function that fetches and displays all the posts.
-        displayAllPosts();
-    } catch (error) {
-        console.log('Error sharing picture:', error);
-    }
+  try {
+    await sharePicture({ userId: username, description: postDescription, pictureImage: selectedImage });
+    // After successful post creation, you can refresh the posts on the page
+    // by calling a function that fetches and displays all the posts.
+    displayAllPosts();
+  } catch (error) {
+    console.log('Error sharing picture:', error);
+  }
 });
 
 async function displayAllPosts() {
