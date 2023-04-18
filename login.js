@@ -23,6 +23,11 @@ async function loginUser(username, password) {
     if (response.ok) {
       const data = await response.json();
       console.log("Logged in:", data);
+      
+      // Save the user ID and token for future use
+      setUserId(data.userId); // Replace this line with your own implementation
+      setToken(data.token); // Replace this line with your own implementation
+      
       alert("Login successful!"); // Added alert for successful login
 
       // Redirect to index.html after successful login (optional)
@@ -63,6 +68,9 @@ async function signUpUser(firstName, lastName, username, email, password) {
   }
 }
 
+function setUserId(userId) {
+  sessionStorage.setItem('userId', userId);
+}
 // Event handlers
 function handleLogin() {
     const username = document.getElementById('loginUsername').value;
