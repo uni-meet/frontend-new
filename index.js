@@ -64,16 +64,17 @@ document.getElementById('postButton').addEventListener('click', async (event) =>
 async function displayAllPosts() {
     try {
         const posts = await getAllPosts();
-        // Add your logic to display the fetched posts on the page
         const postContainer = document.getElementById('postContainer');
         postContainer.innerHTML = '';
         posts.forEach(post => {
+            const profileImage = post.user?.profileImage || 'default_image_url_here';
+            const username = post.user?.username || 'Unknown';
             postContainer.innerHTML += `
                 <div class="post">
                     <div class="post-header">
-                        <img src="${post.user.profileImage}" alt="Profile image">
+                        <img src="${profileImage}" alt="Profile image">
                         <div>
-                            <h5>${post.user.username}</h5>
+                            <h5>${username}</h5>
                             <small>${post.createdAt}</small>
                         </div>
                     </div>
