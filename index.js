@@ -67,8 +67,9 @@ async function displayAllPosts() {
         const postContainer = document.getElementById('postContainer');
         postContainer.innerHTML = '';
         posts.forEach(post => {
-            const profileImage = post.user?.profileImage || 'default_image_url_here';
+            const profileImage = post.user?.profileImage || ''; // Replace '' with a valid default profile image URL if needed
             const username = post.user?.username || 'Unknown';
+            // const postImage = post.pictureImage || ''; // Replace '' with a valid default post image URL if needed
             postContainer.innerHTML += `
                 <div class="post">
                     <div class="post-header">
@@ -80,7 +81,7 @@ async function displayAllPosts() {
                     </div>
                     <div class="post-content">
                         <p>${post.description}</p>
-                        <img src="${post.pictureImage}" alt="Post image">
+                        <!-- <img src="${postImage}" alt="Post image"> -->
                     </div>
                 </div>
             `;
@@ -89,6 +90,7 @@ async function displayAllPosts() {
         console.log('Error fetching all posts:', error);
     }
 }
+
 
 // Call this function to display all posts when the page loads
 displayAllPosts();
