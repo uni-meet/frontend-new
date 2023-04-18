@@ -1,5 +1,6 @@
 import { CURRENT_SERVER_API } from './server.middleware.js';
 import { createToken, getToken } from '../utils/token.util.js';
+const CURRENT_SERVER_API = "https://bloggini-backend.onrender.com/api";
 
 export function login(loginCredentials) {
      return fetch(CURRENT_SERVER_API + '/login', {
@@ -36,23 +37,24 @@ export function signup(signupCredentials) {
         })
 }
 
-export async function getUserInfo(userId) {
+export async function getUserInfo(token) {
     try {
-      const response = await fetch(`${CURRENT_SERVER_API}/user/getInfo/${userId}`, {
+      const response = await fetch(`${CURRENT_SERVER_API}/user/getInfo/${token}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${getToken()}`
-        }
+        },
       });
   
       if (!response.ok) {
-        throw new Error(`User info not found: ${response.status} ${response.statusText}`);
+        const errorData = await response.json();
+        throw new Error(errorData.message || `User info not found: ${response.status}`);
       }
   
-      return await response.json();
+      const data = await response.json();
+      return data;
     } catch (error) {
-      console.log('getUserInfo error:', error);
+      console.error('getUserInfo error:', error);
       throw error;
     }
   }
