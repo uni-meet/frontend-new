@@ -77,12 +77,13 @@
             <div class="left">
                 <a class="profile">
                     <div class="profile-photo">
-                        <img src="images/profile-1.png" >
+                        <img src="images/profile-1.png">
                     </div>
                     <div class="handdle">
                         <h4>User A</h4>
                     </div>
                 </a>
+            
                 <!-----------sidebar----------->
                 <div class="sidebar">
                     <a class="menu-item active">
@@ -405,6 +406,11 @@
 
 <script type="module" src="index.js"></script>
 
+<script>
+    if (sessionStorage.getItem('token')) {
+      updateUserInfo();
+    }
+  </script>
 
 </body>
 </html>

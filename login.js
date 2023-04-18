@@ -23,10 +23,11 @@ async function loginUser(username, password) {
     if (response.ok) {
       const data = await response.json();
       console.log("Logged in:", data);
-      
+        
       // Save the user ID and token for future use
       setUserId(data.userId); // Replace this line with your own implementation
       createToken(data.token); // Use the createToken function to set the token
+      sessionStorage.setItem('token', data.token); // Store the token in sessionStorage
       
       alert("Login successful!"); // Added alert for successful login
 
