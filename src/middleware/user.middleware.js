@@ -47,7 +47,7 @@ export async function getUserInfo(userId) {
       });
   
       if (!response.ok) {
-        throw new Error('User info not found');
+        throw new Error(`User info not found: ${response.status} ${response.statusText}`);
       }
   
       return await response.json();
