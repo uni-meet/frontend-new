@@ -4,16 +4,9 @@ import { getToken } from './utils';
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
-let selectedImage;
 
 addImageButton.addEventListener("click", () => {
   postImageInput.click();
-});
-
-postImageInput.addEventListener("change", (event) => {
-  if (event.target.files.length > 0) {
-    selectedImage = event.target.files[0];
-  }
 });
 
 document.getElementById('postButton').addEventListener('click', async (event) => {
@@ -24,14 +17,47 @@ document.getElementById('postButton').addEventListener('click', async (event) =>
     const username = user.username;
     const postDescription = document.getElementById('postDescription').value;
 
-    try {
-        await sharePicture({ userId: username, description: postDescription });
-        // After successful post creation, you can refresh the posts on the page
-        // by calling a function that fetches and displays all the posts.
-        displayAllPosts();
-    } catch (error) {
-        console.log('Error sharing picture:', error);
-    }
+    // Create a new post element
+    const newPost = document.createElement('div');
+    newPost.classList.add('feed');
+    newPost.innerHTML = `
+        <div class="head">
+            <div class="user">
+                <div class="profile-photo">
+                    <img src="images/profile-1.png">
+                </div>
+                <div class="ingo">
+                    <h3>${username}</h3>
+                </div>
+            </div>
+            <span class="edit">
+                <i class="fa-solid fa-ellipsis"></i>
+            </span>
+        </div>
+        <div class="photo">
+            <!-- Add the image source here once we implement the image uploading functionality -->
+        </div>
+        <div class="action-buttons">
+            <div class="interaction-buttons">
+                <span><i class="fa-solid fa-heart"></i></span>
+                <span><i class="fa-solid fa-comment-dots"></i></span>
+                <span><i class="fa-solid fa-share-nodes"></i></span>
+            </div>
+            <div class="bookmark">
+                <span><i class="fa-solid fa-bookmark"></i></span>
+            </div>
+        </div>
+        <div class="caption">
+            <p><b>${username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
+        </div>
+    `;
+
+    // Append the new post to the container
+    const postContainer = document.getElementById('postContainer');
+    postContainer.appendChild(newPost);
+
+    // Clear the post description input
+    document.getElementById('postDescription').value = '';
 });
 
 async function displayAllPosts() {
