@@ -67,21 +67,18 @@ async function displayAllPosts() {
         const postContainer = document.getElementById('postContainer');
         postContainer.innerHTML = '';
         posts.forEach(post => {
-            const profileImage = post.user?.profileImage || ''; // Replace '' with a valid default profile image URL if needed
-            const username = post.user?.username || 'Unknown';
-            // const postImage = post.pictureImage || ''; // Replace '' with a valid default post image URL if needed
             postContainer.innerHTML += `
                 <div class="post">
                     <div class="post-header">
-                        <img src="${profileImage}" alt="Profile image">
+                        <img src="${post.user?.profileImage || 'images/profile-1.png'}" alt="Profile image">
                         <div>
-                            <h5>${username}</h5>
-                            <small>${post.createdAt}</small>
+                            <h5>${post.user?.username || 'Unknown User'}</h5>
+                            <small>${post.createdAt || 'Unknown Date'}</small>
                         </div>
                     </div>
                     <div class="post-content">
-                        <p>${post.description}</p>
-                        <!-- <img src="${postImage}" alt="Post image"> -->
+                        <p>${post.description || ''}</p>
+                        <img src="${post.pictureImage || 'images/night.jpeg'}" alt="Post image">
                     </div>
                 </div>
             `;

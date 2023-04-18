@@ -36,21 +36,26 @@ export function signup(signupCredentials) {
         })
 }
 
-export function getUserInfo() {
-    return fetch(CURRENT_SERVER_API + '/user/getInfo/${userId}', {
+export async function getUserInfo(userId) {
+    try {
+      const response = await fetch(`${CURRENT_SERVER_API}/user/getInfo/${userId}`, {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-        },
-    })
-        .then(res => {
-            if (res.ok) return res.json();
-            throw new Error('User info not found');
-        })
-        .then(({ user }) => {
-            return user;
-        })
-}
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('User info not found');
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.log('getUserInfo error:', error);
+      throw error;
+    }
+  }
 
 export function getUserName() {
     return fetch(CURRENT_SERVER_API + '/user/getUserUserName/${userId}', {
