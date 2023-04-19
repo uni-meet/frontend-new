@@ -10,9 +10,9 @@ export function sharePicture(pictureInfo) {
     console.log(formData);
     return fetch(CURRENT_SERVER_API + '/picture', {
         method: 'POST',
-        headers: { 'Content-Type': 'multipart/form-data; ', 'Accept': 'application/json' },
+        headers: { 'Accept': 'application/json' },
         body: formData
-    })
+      })
         .then(res => {
             if (res.ok) return res.json();
         }).catch(err => {

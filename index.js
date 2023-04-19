@@ -2,29 +2,43 @@ import { getAllPosts, getUserInfo } from './src/middleware/user.middleware.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
-import jwt_decode from 'jwt-decode';
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
 
-addImageButton.addEventListener("click", () => {
-  postImageInput.click();
-});
-
-document.getElementById('postButton').addEventListener('click', async (event) => {
-  event.preventDefault();
-
-  const token = getToken(); // Get the token from session storage
-  if (!token) {
-    console.error("Token not found");
-    return;
-  }
+addImageButton.addEventListener('click', () => {
+    const token = getToken();
+    const decodedToken = jwt_decode(token);
+    const userId = decodedToken.userId;
+  
+    const descriptionInput = document.getElementById('descriptionInput');
+    const description = descriptionInput.value;
+  
+    const pictureImage = postImageInput.files[0];
+  
+    const pictureInfo = {
+      userId: userId,
+      description: description,
+      pictureImage: pictureImage
+    };
+  
+    sharePicture(pictureInfo);
+  });
+  
+  document.getElementById('postButton').addEventListener('click', async (event) => {
+    event.preventDefault();
+  
+    const token = getToken(); // Get the token from session storage
+    if (!token) {
+      console.error("Token not found");
+      return;
+    }
 
   // Decode the token to get the userId
   const decodedToken = jwt_decode(token);
   const userId = decodedToken.user.body.userId;
 
-  const userInfo = await getUserInfo(token);
+  const userInfo = await getUserInfo(userId);
 
   if (!userId) {
     console.error("User ID not found");
@@ -195,7 +209,17 @@ async function createPost(token, userId, description, image) {
 
 async function updateUserInfo() {
     try {
-      const userInfo = await getUserInfo();
+      const token = getToken(); // Get the token from session storage
+      if (!token) {
+        console.error("Token not found");
+        return;
+      }
+
+      // Decode the token to get the userId
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.user.body.userId;
+
+      const userInfo = await getUserInfo(userId);
   
       if (userInfo) {
         // Update the user info on the page
