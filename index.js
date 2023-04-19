@@ -208,8 +208,8 @@ if (token) {
   updateUserInfo(token);
 }
 
-const userInfo = await getUserInfo(token);
-const newPostData = await createPost(token, userInfo.userId, postDescription, image);
+//const userInfo = await getUserInfo(token);
+//const newPostData = await createPost(token, userInfo.userId, postDescription, image);
 
 // Call this function to display all posts when the page loads
 await displayAllPosts();
