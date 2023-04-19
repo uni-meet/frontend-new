@@ -14,15 +14,22 @@ export function sharePicture(pictureInfo) {
         body: formData
     })
         .then(res => {
-            if (res.ok) return res.json();
-        }).catch(err => {
-            console.log('error');
-            console.log(err);
-            throw new Error('Sharing picture failed');
-        }).then(resData => {
+            if (!res.ok) {
+                console.log('Response status:', res.status);
+                console.log('Response status text:', res.statusText);
+                res.text().then(text => console.log('Response text:', text));
+                throw new Error('Sharing picture failed');
+            }
+            return res.json();
+        })
+        .then(resData => {
             console.log('res data');
             console.log(resData);
         })
+        .catch(err => {
+            console.log('error');
+            console.log(err);
+        });
 }
 
 export function updatePictureCaption(pictureId, caption) {
