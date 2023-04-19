@@ -1,6 +1,6 @@
 import { CURRENT_SERVER_API } from './server.middleware';
 import { createToken } from '../utils/token.util';
-import { ISignupCredentials, ILoginCredentials, IUserGeneralInfo, IUserPasswordInfo } from '../interfaces/user_interface';
+import { ISignupCredentials, ILoginCredentials, IUserGeneralInfo, IUserPasswordInfo, IFeedback } from '../interfaces/user_interface';
 
 export function login(loginCredentials: ILoginCredentials) {
     return fetch(CURRENT_SERVER_API + '/login', {
@@ -49,8 +49,9 @@ export function signup(signupCredentials: ISignupCredentials) {
         })
 }
 //  return fetch(CURRENT_SERVER + `/user/getInfo/${id}`
-export function getUserInfo() {
-    return fetch(CURRENT_SERVER_API + '/user/getInfo/${userId}', {
+//TODO -  make parameters with types
+export function getUserInfo(userId: string) {
+    return fetch(CURRENT_SERVER_API + `/user/getInfo/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
@@ -107,8 +108,8 @@ export function updateUserPassword(userPasswordInfo: IUserPasswordInfo) {
         })
 }
 
-export function deleteUser() {
-    return fetch(CURRENT_SERVER_API + '/user/deleteUser/${userId}', {
+export function deleteUser(userId: string) {
+    return fetch(CURRENT_SERVER_API + `/user/deleteUser/${userId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
     })
@@ -132,7 +133,20 @@ export function getAllPosts() {
 export function logOut() {
     sessionStorage.removeItem('token');
 }
+//TODO - to do feedback interface and to check all fetch API for `${id} `
+export async function sendFeedback(feedbackData: IFeedback, userId: string) {
 
-
+    try {
+        const response = await fetch(`/api/feedback/${userId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(feedbackData)
+        });
+        const data = await response.json();
+        console.log(data.feedback);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 

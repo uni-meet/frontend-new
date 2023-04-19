@@ -12,7 +12,7 @@ router.delete('/picture/deletePicture/:pictureId', pictureCtrl.deletePicture)
 router.post('/picture/updatePictureCaption', pictureCtrl.updatePictureCaption)
 
 */
-
+//TODO - complete API endpoints for pictures
 
 export function sharePicture(pictureInfo: ISharePictureInfo) {
     let formData = new FormData();
@@ -59,7 +59,7 @@ export function updatePictureCaption(pictureId: string, caption: string) {
 }
 
 export function deletePicture(pictureId: string) {
-    return fetch(CURRENT_SERVER_API + '/picture/deletePicture/:pictureId', {
+    return fetch(CURRENT_SERVER_API + `/picture/deletePicture/${pictureId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -70,5 +70,5 @@ export function deletePicture(pictureId: string) {
             throw new Error('Deleting sunset failed');
         })
 }
-
+//TODO - add likes and comments functions with `${id}` types
 

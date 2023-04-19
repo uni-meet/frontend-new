@@ -6,6 +6,7 @@ export interface IUser {
     bio: string,
     privacyMode: number,
     pictures: string[],
+    feedbacks: string[],
 }
 export interface IUserGeneralInfo {
     firstName: string,
@@ -39,4 +40,9 @@ export interface ISignupCredentials {
     lastName: string,
     username: string,
     password: string,
+}
+export interface IFeedback {
+    name: String,
+    message: String,
+    createdAt: Date
 }
