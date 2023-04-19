@@ -35,7 +35,7 @@ export function signup(signupCredentials) {
             createToken(token);
         })
 }
-
+/*
 export async function getUserInfo(token) {
     try {
       const response = await fetch(`${CURRENT_SERVER_API}/user/getInfo/${token}`, {
@@ -57,7 +57,29 @@ export async function getUserInfo(token) {
       throw error;
     }
   }
+*/
 
+export async function getUserInfo(token) {
+    try {
+      const response = await fetch(CURRENT_SERVER_API + "/user/getInfo/" + token, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+  
+      console.log('Server response:', response); // Log the server response
+  
+      if (response.ok) {
+        const userInfo = await response.json();
+        return userInfo;
+      } else {
+        throw new Error("User info not found: " + response.status);
+      }
+    } catch (error) {
+      console.error("getUserInfo error:", error);
+      throw error;
+    }
+  }
 export function getUserName() {
     return fetch(CURRENT_SERVER_API + '/user/getUserUserName/${userId}', {
         method: 'GET',

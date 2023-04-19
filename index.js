@@ -14,9 +14,21 @@ document.getElementById('postButton').addEventListener('click', async (event) =>
     event.preventDefault();
 
     const token = getToken();
-    const user = await getUserInfo(token);
-    const username = user.username;
+    const userId = await getUserId(token);
     const postDescription = document.getElementById('postDescription').value;
+    const image = postImageInput.files[0]; // Get the image file from the input element
+
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    try {
+      const newPostData = await createPost(token, userId, postDescription, image);
+      console.log("New post data:", newPostData);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
 
     // Create a new post element
     const newPost = document.createElement('div');
@@ -164,7 +176,8 @@ if (token) {
   updateUserInfo(token);
 }
 
-const newPostData = await createPost(token, user.userId, postDescription, image);
+const userInfo = await getUserInfo(token);
+const newPostData = await createPost(token, userInfo.userId, postDescription, image);
 
 const response = await fetch(CURRENT_SERVER_API + "/user/getInfo/" + token);
 console.log("Server response:", await response.text());
