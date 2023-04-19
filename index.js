@@ -192,21 +192,23 @@ async function createPost(token, userId, description, image) {
     }
 }
 
-  async function updateUserInfo(token) {
+async function updateUserInfo() {
     try {
-      // Decode the token to get the userId
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken.user.body.userId;
+      const userInfo = await getUserInfo();
   
-      const userInfo = await getUserInfo(userId);
-      const usernameElement = document.querySelector('.handdle h4');
-      if (usernameElement) {
-        usernameElement.textContent = userInfo.username;
+      if (userInfo) {
+        // Update the user info on the page
+        document.querySelector("#username").textContent = userInfo.username;
+        // Add more code here to update other user info as needed
+      } else {
+        console.error("User info not found");
+        // You can show an error message or handle this case as needed
       }
     } catch (error) {
-      console.error('Error updating user info:', error);
+      console.error("Error updating user info:", error);
     }
   }
+  
 
   window.addEventListener("userLoggedIn", updateProfile);
 
