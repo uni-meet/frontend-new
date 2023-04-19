@@ -12,15 +12,9 @@ postButton.addEventListener('click', async () => {
     console.log("Decoded token:", decodedToken);
     const userId = decodedToken.user.body.userId;
 
-    console.log("pictureInfo:", {
-        userId: userId,
-        description: postDescription,
-        pictureImage: postImageInput.files[0],
-      });
     const descriptionInput = document.getElementById('postDescription');
     const description = descriptionInput.value;
 
-    const postImageInput = document.querySelector('#postImageInput');
     const pictureImage = postImageInput.files[0];
 
     const pictureInfo = {
@@ -28,6 +22,8 @@ postButton.addEventListener('click', async () => {
         description: description,
         pictureImage: pictureImage
     };
+
+    console.log("pictureInfo:", pictureInfo);
 
     try {
         await sharePicture(pictureInfo);
