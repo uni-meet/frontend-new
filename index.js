@@ -1,7 +1,20 @@
 import { getAllPosts, getUserInfo } from './src/middleware/index.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
+import jwt from 'jsonwebtoken';
 
+// Assuming you have the token available, decode it like this:
+const decodedToken = jwt.decode(token);
+const userId = decodedToken.user.body.userId;
+
+// Now you have the userId and can use it in the getUserInfo request:
+const response = await fetch(`${API_URL}/api/user/getInfo/${userId}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+  },
+});
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
@@ -120,13 +133,17 @@ async function displayAllPosts() {
 
 async function createPost(token, userId, description, image) {
     try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("description", description);
+      formData.append("image", image);
+  
       const response = await fetch(CURRENT_SERVER_API + "/posts", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId, description, image }),
+        body: formData,
       });
   
       if (response.ok) {
@@ -179,7 +196,5 @@ if (token) {
 const userInfo = await getUserInfo(token);
 const newPostData = await createPost(token, userInfo.userId, postDescription, image);
 
-const response = await fetch(CURRENT_SERVER_API + "/user/getInfo/" + token);
-console.log("Server response:", await response.text());
 // Call this function to display all posts when the page loads
 await displayAllPosts();
