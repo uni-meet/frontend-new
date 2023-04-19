@@ -1,20 +1,7 @@
 import { getAllPosts, getUserInfo } from './src/middleware/index.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
-import jwt from 'jsonwebtoken';
-
-// Assuming you have the token available, decode it like this:
-const decodedToken = jwt.decode(token);
-const userId = decodedToken.user.body.userId;
-
-// Now you have the userId and can use it in the getUserInfo request:
-const response = await fetch(`${API_URL}/api/user/getInfo/${userId}`, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  },
-});
+import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
@@ -24,67 +11,95 @@ addImageButton.addEventListener("click", () => {
 });
 
 document.getElementById('postButton').addEventListener('click', async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const token = getToken();
-    const userId = await getUserId(token);
-    const postDescription = document.getElementById('postDescription').value;
-    const image = postImageInput.files[0]; // Get the image file from the input element
+  const token = getToken(); // Get the token from session storage
+  if (!token) {
+    console.error("Token not found");
+    return;
+  }
 
-    if (!userId) {
-      console.error("User ID not found");
-      return;
-    }
+  // Decode the token to get the userId
+  const decodedToken = jwt_decode(token);
+  const userId = decodedToken.user.body.userId;
 
-    try {
-      const newPostData = await createPost(token, userId, postDescription, image);
-      console.log("New post data:", newPostData);
-    } catch (error) {
-      console.error("Error creating post:", error);
-    }
+  const userInfo = await getUserInfo(token);
 
-    // Create a new post element
-    const newPost = document.createElement('div');
-    newPost.classList.add('feed');
-    newPost.innerHTML = `
-        <div class="head">
-            <div class="user">
-                <div class="profile-photo">
-                    <img src="images/profile-1.png">
-                </div>
-                <div class="ingo">
-                    <h3>${username}</h3>
-                </div>
-            </div>
-            <span class="edit">
-                <i class="fa-solid fa-ellipsis"></i>
-            </span>
-        </div>
-        <div class="photo">
-            <!-- Add the image source here once we implement the image uploading functionality -->
-        </div>
-        <div class="action-buttons">
-            <div class="interaction-buttons">
-                <span><i class="fa-solid fa-heart"></i></span>
-                <span><i class="fa-solid fa-comment-dots"></i></span>
-                <span><i class="fa-solid fa-share-nodes"></i></span>
-            </div>
-            <div class="bookmark">
-                <span><i class="fa-solid fa-bookmark"></i></span>
-            </div>
-        </div>
-        <div class="caption">
-            <p><b>${username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
-        </div>
-    `;
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
 
-    // Append the new post to the container
-    const postContainer = document.getElementById('postContainer');
-    postContainer.appendChild(newPost);
+  const postDescription = document.getElementById('postDescription').value;
+  const image = postImageInput.files[0]; // Get the image file from the input element
 
-    // Clear the post description input
-    document.getElementById('postDescription').value = '';
+  try {
+    const newPostData = await createPost(token, userId, postDescription, image);
+    console.log("New post data:", newPostData);
+  } catch (error) {
+    console.error("Error creating post:", error);
+  }
+
+  // Create a new post element
+  const newPost = document.createElement('div');
+  newPost.classList.add('feed');
+  newPost.innerHTML = `
+      <div class="head">
+          <div class="user">
+              <div class="profile-photo">
+                  <img src="images/profile-1.png">
+              </div>
+              <div class="ingo">
+                  <h3>${userInfo.username}</h3>
+              </div>
+          </div>
+          <span class="edit">
+              <i class="fa-solid fa-ellipsis"></i>
+          </span>
+      </div>
+      <div class="photo">
+          <!-- Add the image source here once we implement the image uploading functionality -->
+      </div>
+      <div class="action-buttons">
+          <div class="interaction-buttons">
+              <span><i class="fa-solid fa-heart"></i></span>
+              <span><i class="fa-solid fa-comment-dots"></i></span>
+              <span><i class="fa-solid fa-share-nodes"></i></span>
+          </div>
+          <div class="bookmark">
+              <span><i class="fa-solid fa-bookmark"></i></span>
+          </div>
+      </div>
+      <div class="caption">
+          <p><b>${userInfo.username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
+      </div>
+  `;
+
+  // Append the new post to the container
+  const postContainer = document.getElementById('postContainer');
+  postContainer.appendChild(newPost);
+
+  // Clear the post description input
+  document.getElementById('postDescription').value = '';
 });
+
+async function getUserData(userId) {
+  const token = getToken();
+  const response = await fetch(`${CURRENT_SERVER_API}/api/user/getInfo/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user data');
+  }
+
+  const data = await response.json();
+  return data;
+}
 
 async function displayAllPosts() {
     try {
