@@ -3,10 +3,10 @@ import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 
-const addImageButton = document.getElementById("addImageButton");
+const postButton = document.getElementById("postButton");
 const postImageInput = document.getElementById("postImage");
 
-addImageButton.addEventListener('click', async () => {
+postButton.addEventListener('click', async () => {
     const token = getToken();
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.userId;
