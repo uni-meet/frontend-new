@@ -1,4 +1,4 @@
-import { getAllPosts, getUserInfo } from './src/middleware/index.js';
+import { getAllPosts, getUserInfo } from './src/middleware/user.middleware.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
@@ -83,24 +83,6 @@ document.getElementById('postButton').addEventListener('click', async (event) =>
   document.getElementById('postDescription').value = '';
 });
 
-async function getUserData(userId) {
-  const token = getToken();
-  const response = await fetch(`${CURRENT_SERVER_API}/api/user/getInfo/${userId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch user data');
-  }
-
-  const data = await response.json();
-  return data;
-}
-
 async function displayAllPosts() {
     try {
         const posts = await getAllPosts();
@@ -175,11 +157,15 @@ async function createPost(token, userId, description, image) {
     }
   }
 
-async function updateProfile() {
+  async function updateProfile() {
     try {
       const token = getToken();
       if (token) {
-        const user = await getUserInfo(token);
+        // Decode the token to get the userId
+        const decodedToken = jwt_decode(token);
+        const userId = decodedToken.user.body.userId;
+  
+        const user = await getUserInfo(userId);
         const profileName = document.querySelector(".left .handdle h4");
         profileName.textContent = user.username;
       }
@@ -188,10 +174,31 @@ async function updateProfile() {
     }
   }
 
+  async function getAllUserPosts() {
+    try {
+        const response = await fetch('https://bloggini-backend.onrender.com/api/users-posts', {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch user posts');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching all user posts:', error);
+        throw error;
+    }
+}
 
   async function updateUserInfo(token) {
     try {
-      const userInfo = await getUserInfo(token);
+      // Decode the token to get the userId
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.user.body.userId;
+  
+      const userInfo = await getUserInfo(userId);
       const usernameElement = document.querySelector('.handdle h4');
       if (usernameElement) {
         usernameElement.textContent = userInfo.username;
@@ -213,3 +220,11 @@ if (token) {
 
 // Call this function to display all posts when the page loads
 await displayAllPosts();
+getAllUserPosts()
+    .then(posts => {
+        // Do something with the posts data
+        console.log(posts);
+    })
+    .catch(error => {
+        console.error('Error fetching all user posts:', error);
+    });
