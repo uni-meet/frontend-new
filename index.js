@@ -9,6 +9,7 @@ const postImageInput = document.getElementById("postImage");
 postButton.addEventListener('click', async () => {
     const token = getToken();
     const decodedToken = jwt_decode(token);
+    console.log("Decoded token:", decodedToken);
     const userId = decodedToken.userId;
 
     console.log("pictureInfo:", {
