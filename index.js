@@ -12,7 +12,7 @@ postButton.addEventListener('click', async () => {
     const userId = decodedToken.userId;
 
     console.log("pictureInfo:", {
-        userId: getUserIdFromToken(token),
+        userId: userId,
         description: postDescription,
         pictureImage: postImageInput.files[0],
       });
