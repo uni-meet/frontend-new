@@ -11,6 +11,11 @@ postButton.addEventListener('click', async () => {
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.userId;
 
+    console.log("pictureInfo:", {
+        userId: getUserIdFromToken(token),
+        description: postDescription,
+        pictureImage: postImageInput.files[0],
+      });
     const descriptionInput = document.getElementById('postDescription');
     const description = descriptionInput.value;
 
