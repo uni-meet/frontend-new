@@ -2,6 +2,7 @@ import { getAllPosts, getUserInfo } from './src/middleware/user.middleware.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
+import jwt_decode from 'jwt-decode';
 
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById("postImage");
@@ -212,16 +213,31 @@ async function updateUserInfo() {
 
   window.addEventListener("userLoggedIn", updateProfile);
 
-  const token = getToken(); // Get the token from session storage
-if (token) {
-  updateUserInfo(token);
-}
+  function getUserIdFromToken(token) {
+    const decodedToken = jwt_decode(token);
+    return decodedToken.user.body.userId;
+  }
+  
+  const token = sessionStorage.getItem('token');
+
 
 //const userInfo = await getUserInfo(token);
 //const newPostData = await createPost(token, userInfo.userId, postDescription, image);
 
 // Call this function to display all posts when the page loads
-await displayAllPosts();
+async function init() {
+    await displayAllPosts();
+    getAllUserPosts()
+      .then(posts => {
+        // Do something with the posts data
+        console.log(posts);
+      })
+      .catch(error => {
+        console.error('Error fetching all user posts:', error);
+      });
+  }
+  
+  init();
 getAllUserPosts()
     .then(posts => {
         // Do something with the posts data

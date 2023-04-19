@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/uni-meet/frontend-new#readme",
   "dependencies": {
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2"
   }
 }
