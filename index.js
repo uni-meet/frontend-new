@@ -45,7 +45,8 @@ addImageButton.addEventListener('click', () => {
     return;
   }
 
-  const postDescription = document.getElementById('postDescription').value;
+  const postDescriptionInput = document.getElementById('postDescription');
+  const description = postDescriptionInput.value;
   const image = postImageInput.files[0]; // Get the image file from the input element
 
   try {
@@ -150,7 +151,7 @@ async function createPost(token, userId, description, image) {
       formData.append("description", description);
       formData.append("image", image);
   
-      const response = await fetch(CURRENT_SERVER_API + "/posts", {
+      const response = await fetch(CURRENT_SERVER_API + "/picture", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
