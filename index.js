@@ -4,7 +4,6 @@ import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 
 const postButton = document.getElementById("postButton");
-const postImageInput = document.getElementById("postImageInput");
 
 postButton.addEventListener('click', async () => {
     const token = getToken();
@@ -15,15 +14,19 @@ postButton.addEventListener('click', async () => {
     const descriptionInput = document.getElementById('postDescription');
     const description = descriptionInput.value;
 
+    const postImageInput = document.getElementById('postImageInput');
     const pictureImage = postImageInput.files[0];
+
+    if (!pictureImage) {
+        alert('Please select an image before submitting.');
+        return;
+    }
 
     const pictureInfo = {
         userId: userId,
         description: description,
         pictureImage: pictureImage
     };
-
-    console.log("pictureInfo:", pictureInfo);
 
     try {
         await sharePicture(pictureInfo);
