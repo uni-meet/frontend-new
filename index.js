@@ -6,9 +6,18 @@ import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 const postButton = document.getElementById("postButton");
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById('postImageInput');
+const selectedFileName = document.getElementById('selectedFileName');
 
 addImageButton.addEventListener('click', () => {
     postImageInput.click();
+});
+
+postImageInput.addEventListener('change', () => {
+    if (postImageInput.files && postImageInput.files[0]) {
+        selectedFileName.textContent = postImageInput.files[0].name;
+    } else {
+        selectedFileName.textContent = '';
+    }
 });
 
 postButton.addEventListener('click', async () => {
