@@ -10,7 +10,16 @@ const selectedFileName = document.getElementById('selectedFileName');
 
 addImageButton.addEventListener('click', () => {
     postImageInput.click();
-});
+  });
+  
+  postImageInput.addEventListener('change', () => {
+    const selectedFile = postImageInput.files[0];
+    if (selectedFile) {
+      selectedFileName.textContent = selectedFile.name;
+    } else {
+      selectedFileName.textContent = '';
+    }
+  });
 
 postImageInput.addEventListener('change', () => {
     if (postImageInput.files && postImageInput.files[0]) {
