@@ -5,7 +5,7 @@ export function sharePicture(pictureInfo) {
     let formData = new FormData();
     formData.append('userId', pictureInfo.userId);
     formData.append('description', pictureInfo.description);
-    formData.append('file', pictureInfo.pictureImage);
+    formData.append('pictureImage', pictureInfo.pictureImage);
 
     console.log(formData);
     return fetch(CURRENT_SERVER_API + '/picture', {
