@@ -4,10 +4,11 @@ const userSearchForm = document.getElementById('user-search-form');
 const searchStringInput = document.getElementById('search-string');
 const searchResultsDiv = document.getElementById('search-results');
 
-function displaySearchResults(users) {
+function displaySearchResults(response) {
+  const users = response.data;
   searchResultsDiv.innerHTML = '';
 
-  console.log('Response from server:', users);
+  console.log('Response from server:', response);
 
   users.forEach(user => {
     const userElement = document.createElement('div');
