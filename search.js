@@ -2,18 +2,18 @@ import { searchUsers } from "./src/middleware/search.middleware.js";
 
 const userSearchForm = document.getElementById('user-search-form');
 const searchStringInput = document.getElementById('search-string');
-const searchResultsDropdown = document.getElementById('search-results');
+const searchResultsDiv = document.getElementById('search-results');
 
 function displaySearchResults(users) {
-  searchResultsDropdown.innerHTML = '';
+  searchResultsDiv.innerHTML = '';
 
-  users.forEach((user) => {
+  console.log('Response from server:', users);
+
+  users.forEach(user => {
     const userElement = document.createElement('div');
-    userElement.textContent = user.username;
-    searchResultsDropdown.appendChild(userElement);
+    userElement.textContent = `${user.name} (${user.username})`;
+    searchResultsDiv.appendChild(userElement);
   });
-
-  searchResultsDropdown.classList.add('active');
 }
 
 userSearchForm.addEventListener('submit', (event) => {
