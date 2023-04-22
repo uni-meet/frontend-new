@@ -1,4 +1,4 @@
-import { searchUsers } from './search.middleware.js';
+import { searchUsers } from "./src/middleware/search.middleware.js";
 
 const userSearchForm = document.getElementById('user-search-form');
 const searchStringInput = document.getElementById('search-string');
