@@ -15,7 +15,15 @@ function displaySearchResults(response) {
     userElement.textContent = `${user.firstName} ${user.lastName} (${user.username})`;
     searchResultsDiv.appendChild(userElement);
   });
+
+  // Show the search results dropdown
+  searchResultsDiv.style.display = 'block';
 }
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.search-container')) {
+      searchResultsDiv.style.display = 'none';
+    }
+  });
 
 userSearchForm.addEventListener('submit', (event) => {
   event.preventDefault();

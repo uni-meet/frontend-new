@@ -16,18 +16,21 @@
 <body>
     <section class="navbar">
         <nav>
-            <h2>
-                UniGram
-            </h2>
+          <h2>
+            UniGram
+          </h2>
+          <div class="search-container">
             <form id="user-search-form" class="search-bar">
-                <div class="search-icon">
-                    <img src="images/search.png">
-                </div>
-                <div class="search-bar-input">
-                    <textarea id="search-string" placeholder="Search Anything.." rows="5" class="search-bar"></textarea>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
+              <div class="search-icon">
+                <img src="images/search.png">
+              </div>
+              <div class="search-bar-input">
+                <textarea id="search-string" placeholder="Search User..." rows="5" class="search-bar"></textarea>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
             </form>
+            <div id="search-results" class="search-results-dropdown"></div>
+          </div>
             <div id="search-results"></div>
             <div class="wrapper">
                 <input id="toggler" type="checkbox">
