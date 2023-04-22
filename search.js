@@ -12,7 +12,7 @@ function displaySearchResults(response) {
 
   users.forEach(user => {
     const userElement = document.createElement('div');
-    userElement.textContent = `${user.name} (${user.username})`;
+    userElement.textContent = `${user.firstName} ${user.lastName} (${user.username})`;
     searchResultsDiv.appendChild(userElement);
   });
 }
