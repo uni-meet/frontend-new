@@ -2,6 +2,19 @@ import { searchUsers } from "./src/middleware/search.middleware.js";
 
 const userSearchForm = document.getElementById('user-search-form');
 const searchStringInput = document.getElementById('search-string');
+const searchResultsDropdown = document.getElementById('search-results');
+
+function displaySearchResults(users) {
+  searchResultsDropdown.innerHTML = '';
+
+  users.forEach((user) => {
+    const userElement = document.createElement('div');
+    userElement.textContent = user.username;
+    searchResultsDropdown.appendChild(userElement);
+  });
+
+  searchResultsDropdown.classList.add('active');
+}
 
 userSearchForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -10,8 +23,7 @@ userSearchForm.addEventListener('submit', (event) => {
 
   searchUsers(searchString)
     .then((users) => {
-      console.log('Search results:', users);
-      // Do something with the search results, e.g., display them on the page.
+      displaySearchResults(users);
     })
     .catch((error) => {
       console.error('Error searching users:', error);
