@@ -52,9 +52,52 @@ postButton.addEventListener('click', async () => {
     };
 
     try {
-        await sharePicture(pictureInfo);
-        console.log('Post created successfully');
-    } catch (error) {
-        console.error('Error creating post:', error);
-    }
-});
+        const imageUrl = await sharePicture(pictureInfo);
+        console.log("Post created successfully");
+    
+        addNewPost(userInfo.username, postDescription, imageUrl);
+      } catch (error) {
+        console.error("Error creating post:", error);
+      }
+    });
+
+function addNewPost(username, postDescription, imageUrl) {
+    const newPost = document.createElement('div');
+    newPost.classList.add('feed');
+    newPost.innerHTML = `
+      <div class="head">
+          <div class="user">
+              <div class="profile-photo">
+                  <img src="images/profile-1.png">
+              </div>
+              <div class="ingo">
+                  <h3>${username}</h3>
+              </div>
+          </div>
+          <span class="edit">
+              <i class="fa-solid fa-ellipsis"></i>
+          </span>
+      </div>
+      <div class="photo">
+          <img src="${imageUrl}">
+      </div>
+      <div class="action-buttons">
+          <div class="interaction-buttons">
+              <span><i class="fa-solid fa-heart"></i></span>
+              <span><i class="fa-solid fa-comment-dots"></i></span>
+              <span><i class="fa-solid fa-share-nodes"></i></span>
+          </div>
+          <div class="bookmark">
+              <span><i class="fa-solid fa-bookmark"></i></span>
+          </div>
+      </div>
+      <div class="caption">
+          <p><b>${username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
+      </div>
+    `;
+  
+    const feedsContainer = document.querySelector('.feeds');
+    feedsContainer.appendChild(newPost);
+  }
+
+  addNewPost(userInfo.username, postDescription, imageUrl);
