@@ -136,7 +136,7 @@ img{
   
   .navbar .search-bar .search-bar-input textarea {
     width: 100%;
-    padding: 0.9rem; /* adjusted padding */
+    padding: 0.5rem; /* adjusted padding */
     height: 2.5rem; /* adjusted height */
     background: transparent;
     color: var(--color-dark);
