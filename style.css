@@ -117,14 +117,14 @@ img{
     justify-content: space-between;
 }
 .navbar .search-bar {
-    width: 50%;
+    width: 100%; /* Increase the width here */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
     background-color: var(--color-white);
-    padding: 0.4rem 0.2rem; /* adjusted padding */
-    height: 2.5rem; /* adjusted height */
+    padding: 0.4rem 0.2rem;
+    height: 2.5rem;
     border-radius: var(--border-radius);
   }
 
@@ -169,7 +169,22 @@ img{
     align-self: flex-end;
   }
   
+  .search-container {
+    position: relative;
+  }
   
+  .search-results-dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
 
 
 .navbar .create{
