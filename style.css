@@ -152,8 +152,8 @@ img{
   }
   
   .navbar .search-bar .search-icon img {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
   }
   
@@ -371,9 +371,27 @@ main .container .left .profile{
   }
   
   .middle .create-post .profile-photo img {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    width: 2.7rem;
+
+    border-radius:50%;
+  }
+  .add-post-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .add-post-links a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .add-post-links a:first-child img {
+    width: 20px; /* set width to 20px */
+    height: 20px; /* set height to 20px */
+    margin-right: 10px;
   }
   
   .middle .create-post .create-post-input {
@@ -405,7 +423,7 @@ main .container .left .profile{
     cursor: pointer;
     align-self: flex-end;
   }
-
+ 
 
 .middle .feeds .feed{
     background: var(--color-white);
