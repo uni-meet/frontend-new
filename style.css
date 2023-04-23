@@ -408,23 +408,7 @@ main .container .left .profile{
     cursor: pointer;
     align-self: flex-end;
   }
-  .add-post-links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .add-post-links a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .add-post-links img {
-    margin-right: 10px;
-  }
-  
+ 
 
 .middle .feeds .feed{
     background: var(--color-white);
