@@ -3,6 +3,7 @@ import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 
+document.addEventListener('DOMContentLoaded', () => {
 const postButton = document.getElementById("postButton");
 const addImageButton = document.getElementById("addImageButton");
 const postImageInput = document.getElementById('postImageInput');
@@ -101,3 +102,5 @@ function addNewPost(username, postDescription, imageUrl) {
   }
 
   addNewPost(userInfo.username, postDescription, imageUrl);
+
+});
