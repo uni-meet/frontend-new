@@ -20,9 +20,7 @@
                 UniGram
             </h2>
             <form class="search-bar">
-                <div class="search-icon">
-                    <img src="images/search.png">
-                </div>
+               
                 <div class="search-bar-input">
                 <textarea placeholder="Search Anything.." rows="5" class="search-bar"></textarea>
                  <button type="submit" class="btn btn-primary">Search</button>
@@ -34,7 +32,8 @@
                   <img src="images/profile-1.png" style="height: 40px; width: 50px;" alt="Dropdown">
                 </label>
                 <div class="dropdown">
-                  <a href="" onclick="testGetUserInfo()">View Profile</a>
+                  <a href="index.html" onclick="testGetUserInfo()">Home</a> 
+                  <a href="userprofile.html" onclick="testGetUserInfo()">View Profile</a>
                   <a href="feedback.html">Feedback and Support</a>
                   <a href="">Setting</a>
                   <a href="login.html" onclick="logOut()">Logout</a>
@@ -73,337 +72,339 @@
             
         </nav>
     </section>
-    <main>
-        <div class="container">
-            <!----=============== left ===============-->
-            <div class="left">
-                <a class="profile">
-                    <div class="profile-photo">
-                        <img src="images/profile-1.png">
-                    </div>
-                    <div class="handdle">
-                        <h4>User A</h4>
-                    </div>
-                </a>
-            
-                <!-----------sidebar----------->
-                <div class="sidebar">
-                    <a class="menu-item active">
-                        <span><i class="fa-solid fa-house"></i></span><h3>Home</h3>
+    <div>
+        <main>
+            <div class="container">
+                <!----=============== left ===============-->
+                <div class="left">
+                    <a class="profile">
+                        <div class="profile-photo">
+                            <img src="images/profile-1.png">
+                        </div>
+                        <div class="handdle">
+                            <h4>User A</h4>
+                        </div>
                     </a>
-                    <a class="menu-item ">
-                        <span><i class="fa-solid fa-compass"></i></span><h3>Explore</h3>
-                    </a>
+                
+                    <!-----------sidebar----------->
+                    <div class="sidebar">
+                        <a class="menu-item active">
+                            <span><i class="fa-solid fa-house"></i></span><h3>Home</h3>
+                        </a>
+                        <a class="menu-item ">
+                            <span><i class="fa-solid fa-compass"></i></span><h3>Explore</h3>
+                        </a>
+                        
+                        <a class="menu-item" id="notifications">
+                            <span><i class="fa-solid fa-bell"><small class="notification-count">9+</small></i></span><h3>Notifications</h3>
+                            <!-------------notification popup------------>
+                            <div class="notifications-popup">
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User B</b> acepted your friend request
+                                        <small class="text-muted">2 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User C</b> Comented on your post
+                                        <small class="text-muted">1 HOUR AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User D </b> and <b>289 others</b>like your post
+                                        <small class="text-muted">4 MINUTES AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User E </b> and <b>289 others</b>like your post
+                                        <small class="text-muted">4 MINUTES AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User F </b> and <b>289 others</b>like your post
+                                        <small class="text-muted">4 MINUTES AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>User G</b> and <b>289 others</b>like your post
+                                        <small class="text-muted">4 MINUTES AGO</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="menu-item" id="messages-notification">
+                            <span><i class="fa-solid fa-envelope"><small class="notification-count">6</small></i></span><h3>Messages</h3>
+                        </a>
+                       
+                        <a class="menu-item" id="theme">
+                            <span><i class="fa-solid fa-palette"></i></span><h3>Theme</h3>
+                        </a>
+                        <a class="menu-item ">
+                            <span><i class="fa-solid fa-gear"></i></span><h3>Settings</h3>
+                        </a>    
+                    </div>
                     
-                    <a class="menu-item" id="notifications">
-                        <span><i class="fa-solid fa-bell"><small class="notification-count">9+</small></i></span><h3>Notifications</h3>
-                        <!-------------notification popup------------>
-                        <div class="notifications-popup">
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User B</b> acepted your friend request
-                                    <small class="text-muted">2 DAYS AGO</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User C</b> Comented on your post
-                                    <small class="text-muted">1 HOUR AGO</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User D </b> and <b>289 others</b>like your post
-                                    <small class="text-muted">4 MINUTES AGO</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User E </b> and <b>289 others</b>like your post
-                                    <small class="text-muted">4 MINUTES AGO</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User F </b> and <b>289 others</b>like your post
-                                    <small class="text-muted">4 MINUTES AGO</small>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="notification-body">
-                                    <b>User G</b> and <b>289 others</b>like your post
-                                    <small class="text-muted">4 MINUTES AGO</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="menu-item" id="messages-notification">
-                        <span><i class="fa-solid fa-envelope"><small class="notification-count">6</small></i></span><h3>Messages</h3>
-                    </a>
-                   
-                    <a class="menu-item" id="theme">
-                        <span><i class="fa-solid fa-palette"></i></span><h3>Theme</h3>
-                    </a>
-                    <a class="menu-item ">
-                        <span><i class="fa-solid fa-gear"></i></span><h3>Settings</h3>
-                    </a>    
                 </div>
-                
-            </div>
-            <!----=============== middle ===============-->
-            <div class="middle">
-                
-                <form class="create-post" onsubmit="return false;">
-                    <div class="profile-photo">
-                        <img src="images/profile-1.png">
-                    </div>
-                    <div class="create-post-input">
-                        <textarea placeholder="What's on your mind" rows="5" class="create-post"></textarea>
-                        <div class="add-post-links">
-                            <a href="#"><img src="images/photo.png" /> Photo/Video</a>
+                <!----=============== middle ===============-->
+                <div class="middle">
+                    
+                    <form class="create-post" onsubmit="return false;">
+                        <div class="profile-photo">
+                            <img src="images/profile-1.png">
+                        </div>
+                        <div class="create-post-input">
+                            <textarea placeholder="What's on your mind" rows="5" class="create-post"></textarea>
+                            <div class="add-post-links">
+                                <a href="#"><img src="images/photo.png" /> Photo/Video</a>
+                                
+                              </div>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                    </form>
+                    <div id="postContainer"></div>                          
+                    <div class="feeds">
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="ingo">
+                                        <h3>User B</h3>
+                                    </div>
+                                </div>
+                                <span class="edit">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+                            </div>
+                            <div class="photo">
+                                <img src="images/goodmorning.jpeg" >
+                            </div>
+                            <div class="action-buttons">
+                                <div class="interaction-buttons">
+                                    <span><i class="fa-solid fa-heart"></i></span>
+                                    <span><i class="fa-solid fa-comment-dots"></i></span>
+                                    <span><i class="fa-solid fa-share-nodes"></i></span>
+                                </div>
+                                
+                                <div class="bookmark">
+                                    <span><i class="fa-solid fa-bookmark"></i></span>
+                                </div>
+                            </div>
+    
+                            <div class="caption">
+                                <p><b>User B</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag"> #morning</span></p>
+                            </div>
+                        </div>
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="ingo">
+                                        <h3>User C</h3>
+                                    </div>
+                                </div>
+                                <span class="edit">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+                            </div>
+                            <div class="photo">
+                                <img src="images/afternoon.jpeg" >
+                            </div>
+                            <div class="action-buttons">
+                                <div class="interaction-buttons">
+                                    <span><i class="fa-solid fa-heart"></i></span>
+                                    <span><i class="fa-solid fa-comment-dots"></i></span>
+                                    <span><i class="fa-solid fa-share-nodes"></i></span>
+                                </div>
+                                <div class="bookmark">
+                                    <span><i class="fa-solid fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                            <div class="caption">
+                                <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#afternoon</span></p>
+                            </div>
+                        </div>
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-photo">
+                                        <img src="images/profile-1.png" >
+                                    </div>
+                                    <div class="ingo">
+                                        <h3>User E</h3>
+                                    </div>
+                                </div>
+                                <span class="edit">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+                            </div>
+                            <div class="photo">
+                                <img src="images/night.jpeg" >
+                            </div>
+                            <div class="action-buttons">
+                                <div class="interaction-buttons">
+                                    <span><i class="fa-solid fa-heart"></i></span>
+                                    <span><i class="fa-solid fa-comment-dots"></i></span>
+                                    <span><i class="fa-solid fa-share-nodes"></i></span>
+                                </div>
+                                <div class="bookmark">
+                                    <span><i class="fa-solid fa-bookmark"></i></span>
+                                </div>
+                            </div>
                             
-                          </div>
-                        <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                </form>
-                <div id="postContainer"></div>                          
-                <div class="feeds">
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="ingo">
-                                    <h3>User B</h3>
-                                </div>
-                            </div>
-                            <span class="edit">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </span>
-                        </div>
-                        <div class="photo">
-                            <img src="images/goodmorning.jpeg" >
-                        </div>
-                        <div class="action-buttons">
-                            <div class="interaction-buttons">
-                                <span><i class="fa-solid fa-heart"></i></span>
-                                <span><i class="fa-solid fa-comment-dots"></i></span>
-                                <span><i class="fa-solid fa-share-nodes"></i></span>
-                            </div>
-                            
-                            <div class="bookmark">
-                                <span><i class="fa-solid fa-bookmark"></i></span>
-                            </div>
-                        </div>
-
-                        <div class="caption">
-                            <p><b>User B</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag"> #morning</span></p>
-                        </div>
-                    </div>
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="ingo">
-                                    <h3>User C</h3>
-                                </div>
-                            </div>
-                            <span class="edit">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </span>
-                        </div>
-                        <div class="photo">
-                            <img src="images/afternoon.jpeg" >
-                        </div>
-                        <div class="action-buttons">
-                            <div class="interaction-buttons">
-                                <span><i class="fa-solid fa-heart"></i></span>
-                                <span><i class="fa-solid fa-comment-dots"></i></span>
-                                <span><i class="fa-solid fa-share-nodes"></i></span>
-                            </div>
-                            <div class="bookmark">
-                                <span><i class="fa-solid fa-bookmark"></i></span>
-                            </div>
-                        </div>
-                        <div class="caption">
-                            <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#afternoon</span></p>
-                        </div>
-                    </div>
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-photo">
-                                    <img src="images/profile-1.png" >
-                                </div>
-                                <div class="ingo">
-                                    <h3>User E</h3>
-                                </div>
-                            </div>
-                            <span class="edit">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </span>
-                        </div>
-                        <div class="photo">
-                            <img src="images/night.jpeg" >
-                        </div>
-                        <div class="action-buttons">
-                            <div class="interaction-buttons">
-                                <span><i class="fa-solid fa-heart"></i></span>
-                                <span><i class="fa-solid fa-comment-dots"></i></span>
-                                <span><i class="fa-solid fa-share-nodes"></i></span>
-                            </div>
-                            <div class="bookmark">
-                                <span><i class="fa-solid fa-bookmark"></i></span>
+                            <div class="caption">
+                                <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#night</span></p>
                             </div>
                         </div>
                         
-                        <div class="caption">
-                            <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#night</span></p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <!--====================== RIGHT SIDE =================-->
-            <div class="right">
-                <div class="messages">
-                    <div class="heading">
-                        <h4>Messages</h4><i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                    <div class="category">
-                        <h6 class="active">Primary</h6>
-                        <h6 >General</h6>
-                        <h6 class="message-request">Request(2)</h6>
-                    </div>
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="images/profile-1.png" >
-                        </div>
-                        <div class="message-body">
-                            <h5>User B</h5>
-                            <p class="text-muted">Hey There!</p>
-                        </div>
-                    </div>
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="images/profile-1.png" >
-                        </div>
-                        <div class="message-body">
-                            <h5>User C</h5>
-                            <p class="text-muted">Wanna hangout this weekend.</p>
-                        </div>
-                    </div>
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="images/profile-1.png" >
-                        </div>
-                        <div class="message-body">
-                            <h5>User D</h5>
-                            <p class="text-muted">Hey, wanna go over to Mila's?</p>
-                        </div>
-                    </div>
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="images/profile-1.png" >
-                            <div class="active"></div>
-                        </div>
-                        <div class="message-body">
-                            <h5>User I</h5>
-                            <p class="text-bold">new messages</p>
-
-                        </div>
-                    </div>
-                    <div class="message">
-                        <div class="profile-photo">
-                            <img src="images/profile-1.png" >
-                        </div>
-                        <div class="message-body">
-                            <h5>User V</h5>
-                            <p class="text-muted">Just woke up bruh</p>
-                        </div>
                     </div>
                 </div>
-        </div>
-    </main>
-            
-
-
+                <!--====================== RIGHT SIDE =================-->
+                <div class="right">
+                    <div class="messages">
+                        <div class="heading">
+                            <h4>Messages</h4><i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                        <div class="category">
+                            <h6 class="active">Primary</h6>
+                            <h6 >General</h6>
+                            <h6 class="message-request">Request(2)</h6>
+                        </div>
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="images/profile-1.png" >
+                            </div>
+                            <div class="message-body">
+                                <h5>User B</h5>
+                                <p class="text-muted">Hey There!</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="images/profile-1.png" >
+                            </div>
+                            <div class="message-body">
+                                <h5>User C</h5>
+                                <p class="text-muted">Wanna hangout this weekend.</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="images/profile-1.png" >
+                            </div>
+                            <div class="message-body">
+                                <h5>User D</h5>
+                                <p class="text-muted">Hey, wanna go over to Mila's?</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="images/profile-1.png" >
+                                <div class="active"></div>
+                            </div>
+                            <div class="message-body">
+                                <h5>User I</h5>
+                                <p class="text-bold">new messages</p>
     
-
-    <!---------------The customization------------------>
-<div class="customize-theme">
-    <div class="card">
-        <h2>Customize your view</h2>
-        <p class="text-muted">Manage your font size, color, and background</p>
-            <!---------Font size---------->
-        <div class="font-size">
-            <h4>Font Size</h4>
-            <div>
-                <h6>Aa</h6>
-            <div class="choose-size">
-                <span class="font-size-1"></span>
-                <span class="font-size-2 active"></span>
-                <span class="font-size-3"></span>
-                <span class="font-size-4"></span>
-                <span class="font-size-5"></span>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="images/profile-1.png" >
+                            </div>
+                            <div class="message-body">
+                                <h5>User V</h5>
+                                <p class="text-muted">Just woke up bruh</p>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <h3>Aa</h3>
+        </main>
+                
+    
+    
+        
+    
+        <!---------------The customization------------------>
+    <div class="customize-theme">
+        <div class="card">
+            <h2>Customize your view</h2>
+            <p class="text-muted">Manage your font size, color, and background</p>
+                <!---------Font size---------->
+            <div class="font-size">
+                <h4>Font Size</h4>
+                <div>
+                    <h6>Aa</h6>
+                <div class="choose-size">
+                    <span class="font-size-1"></span>
+                    <span class="font-size-2 active"></span>
+                    <span class="font-size-3"></span>
+                    <span class="font-size-4"></span>
+                    <span class="font-size-5"></span>
+                </div>
+                <h3>Aa</h3>
+                </div>
             </div>
+            <div class="color">
+                <h4>Color</h4>
+                <div class="choose-color">
+                <span class="color-1 active"></span>
+                <span class="color-2 "></span>
+                <span class="color-3"></span>
+                <span class="color-4"></span>
+                <span class="color-5"></span>
+                </div>
+            </div>
+                <!--------------Background colors--------------->
+            <div class="background">
+                <h4>Background</h4>
+                <div class="choose-bg">
+                    <div class="bg-1 active">
+                        <span></span>
+                        <h5>Light</h5>
+                    </div>
+                    <div class="bg-2 ">
+                        <span></span>
+                        <h5>Dim</h5>
+                    </div>
+                    <div class="bg-3">
+                        <span></span>
+                        <h5 for="bg-3">Lights Out</h5>
+                    </div>
+                </div>
         </div>
-        <div class="color">
-            <h4>Color</h4>
-            <div class="choose-color">
-            <span class="color-1 active"></span>
-            <span class="color-2 "></span>
-            <span class="color-3"></span>
-            <span class="color-4"></span>
-            <span class="color-5"></span>
-            </div>
+            <!----------Primary colors------------>
+        
         </div>
-            <!--------------Background colors--------------->
-        <div class="background">
-            <h4>Background</h4>
-            <div class="choose-bg">
-                <div class="bg-1 active">
-                    <span></span>
-                    <h5>Light</h5>
-                </div>
-                <div class="bg-2 ">
-                    <span></span>
-                    <h5>Dim</h5>
-                </div>
-                <div class="bg-3">
-                    <span></span>
-                    <h5 for="bg-3">Lights Out</h5>
-                </div>
-            </div>
     </div>
-        <!----------Primary colors------------>
     
     </div>
-</div>
-
 
 
 <script src="app.js"></script>
