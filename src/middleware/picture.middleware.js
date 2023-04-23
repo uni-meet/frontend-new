@@ -1,36 +1,34 @@
 
 import { CURRENT_SERVER_API } from "./server.middleware.js";
 
-export function sharePicture(pictureInfo) {
+export async function sharePicture(pictureInfo) {
     let formData = new FormData();
     formData.append('userId', pictureInfo.userId);
     formData.append('description', pictureInfo.description);
     formData.append('pictureImage', pictureInfo.pictureImage);
-
+  
     console.log(formData);
-    return fetch(CURRENT_SERVER_API + '/picture', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: formData
-    })
-        .then(res => {
-            if (!res.ok) {
-                console.log('Response status:', res.status);
-                console.log('Response status text:', res.statusText);
-                res.text().then(text => console.log('Response text:', text));
-                throw new Error('Sharing picture failed');
-            }
-            return res.json();
-        })
-        .then(resData => {
-            console.log('res data');
-            console.log(resData);
-        })
-        .catch(err => {
-            console.log('error');
-            console.log(err);
-        });
-}
+  
+    const response = await fetch(CURRENT_SERVER_API + '/picture', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    });
+  
+    if (!response.ok) {
+      console.log('Response status:', response.status);
+      console.log('Response status text:', response.statusText);
+      response.text().then(text => console.log('Response text:', text));
+      throw new Error('Sharing picture failed');
+    }
+  
+    const resData = await response.json();
+    console.log('res data');
+    console.log(resData);
+  
+    // Assuming the server returns the new post's details, and it has a field named 'imageUrl'
+    return resData.imageUrl;
+  }
 
 export function updatePictureCaption(pictureId, caption) {
     return fetch(CURRENT_SERVER_API + '/picture/updatePictureCaption', {
