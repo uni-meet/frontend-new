@@ -176,12 +176,10 @@
                         <img src="images/profile-1.png">
                     </div>
                     <div class="create-post-input">
-                        <textarea placeholder="What's on your mind" rows="5" class="create-post"></textarea>
-                        <div class="add-post-links">
-                            <a href="#"><img src="images/photo.png" /> Photo/Video</a>
-                            
-                          </div>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
+                        <input type="file" id="postImage" accept="images/*" style="display:none;" />
+                        <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
+                        <button type="submit" class="btn btn-primary" id="postButton">Post</button>
                     </div>
                 </form>
                 <div id="postContainer"></div>                          
