@@ -4,11 +4,13 @@ import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 const postButton = document.getElementById("postButton");
 const addImageButton = document.getElementById("addImageButton");
-const postImageInput = document.getElementById('postImageInput');
+const postImageInput = document.getElementById('postImage');
 const selectedFileName = document.getElementById('selectedFileName');
+const token = getToken();
+const userInfo = await getUserInfo(token);
 
 addImageButton.addEventListener('click', () => {
     postImageInput.click();

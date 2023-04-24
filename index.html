@@ -20,13 +20,13 @@
             <h2>
                 UniGram
             </h2>
-            <form class="search-bar">
-                
+            <form id="user-search-form" class="search-bar" onsubmit="return false;">
                 <div class="search-bar-input">
-                <textarea placeholder="Search Anything.." rows="5" class="search-bar"></textarea>
-                 <button type="submit" class="btn btn-primary">Search</button>
+                  <input type="text" id="search-string" placeholder="Search Anything.." />
+                  <button type="submit" class="btn btn-primary">Search</button>
                 </div>
-            </form> 
+                <div id="search-results" style="display: none;"></div>
+              </form> 
             <div class="wrapper">
                 <input id="toggler" type="checkbox">
                 <label for="toggler">
@@ -172,15 +172,15 @@
                 
                 <form class="create-post" onsubmit="return false;">
                     <div class="profile-photo">
-                        <img src="images/profile-1.png">
+                      <img src="images/profile-1.png">
                     </div>
                     <div class="create-post-input">
-                        <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
-                        <input type="file" id="postImage" accept="images/*" style="display:none;" />
-                        <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
-                        <button type="submit" class="btn btn-primary" id="postButton">Post</button>
+                      <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
+                      <input type="file" id="postImage" accept="images/*" style="display:none;" />
+                      <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
+                      <button type="submit" class="btn btn-primary" id="postButton">Post</button>
                     </div>
-                </form>
+                  </form>
                 <div id="postContainer"></div>                          
                 <div class="feeds">
                     <div class="feed">
