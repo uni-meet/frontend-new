@@ -1,5 +1,6 @@
 import { searchUsers } from "./src/middleware/search.middleware.js";
 
+document.addEventListener('DOMContentLoaded', () => {
 const userSearchForm = document.getElementById('user-search-form');
 const searchStringInput = document.getElementById('search-string');
 const searchResultsDiv = document.getElementById('search-results');
@@ -37,4 +38,5 @@ userSearchForm.addEventListener('submit', (event) => {
     .catch((error) => {
       console.error('Error searching users:', error);
     });
+});
 });
