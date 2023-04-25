@@ -1,39 +1,44 @@
 
 import { CURRENT_SERVER_API } from "./server.middleware.js";
 
-export async function sharePicture(pictureInfo) {
-    let formData = new FormData();
-    formData.append('userId', pictureInfo.userId);
-    formData.append('description', pictureInfo.description);
-    formData.append('pictureImage', pictureInfo.pictureImage);
-  
-    console.log(formData);
-  
-    const response = await fetch(CURRENT_SERVER_API + '/picture', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: formData
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
     });
+  }
   
-    if (!response.ok) {
-      console.log('Response status:', response.status);
-      console.log('Response status text:', response.statusText);
-      response.text().then(text => console.log('Response text:', text));
-      throw new Error('Sharing picture failed');
-    }
+  export async function sharePicture(pictureInfo) {
+    const formData = new FormData();
+    formData.append("userId", pictureInfo.userId);
+    formData.append("description", pictureInfo.description);
   
-    const resData = await response.json();
-    console.log('res data');
-    console.log(resData);
+    // Convert the image file to base64 and append it to formData
+    const base64Image = await fileToBase64(pictureInfo.pictureImage);
+    formData.append("pictureImage", base64Image);
   
-    // Assuming the server returns the new post's details, and it has a field named 'imageUrl'
-    return resData.imageUrl;
+    return fetch(`${CURRENT_SERVER_API}/api/picture/sharePicture`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
+      body: formData,
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error("Sharing picture failed");
+      })
+      .then((data) => {
+        return data.message;
+      });
   }
 
-export function updatePictureCaption(pictureId, caption) {
+  export function updatePictureCaption(pictureId, caption) {
     return fetch(CURRENT_SERVER_API + '/picture/updatePictureCaption', {
         method: 'POST',
-        headers: { 'Content-Type': 'multipart/form-data; ', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
             pictureId: pictureId,
             description: caption

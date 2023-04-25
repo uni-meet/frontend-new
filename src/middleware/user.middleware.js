@@ -83,19 +83,21 @@ export async function getUserInfo(token) {
 
   export function getUserInfo(userId) {
     return fetch(`${CURRENT_SERVER_API}/user/getInfo/${userId}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-        },
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
     })
-        .then(res => {
-            if (res.ok) return res.json();
-            throw new Error('User info not found');
-        })
-        .then(({ user }) => {
-            return user;
-        })
-}
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error("User info not found");
+      })
+      .then((user) => {
+        return {
+          username: user.username,
+        };
+      });
+  }
 
 export function getUserName() {
     return fetch(CURRENT_SERVER_API + '/user/getUserUserName/${userId}', {
