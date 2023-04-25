@@ -11,7 +11,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.4.3/typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/3.1.2/jwt-decode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/3.3.0/jwt-decode.min.js"></script>
 
 </head>
 <body>
@@ -20,13 +20,13 @@
             <h2>
                 UniGram
             </h2>
-            <form id="user-search-form" class="search-bar" onsubmit="return false;">
+            <form class="search-bar">
                 <div class="search-bar-input">
-                  <input type="text" id="search-string" placeholder="Search Anything.." />
+                  <textarea placeholder="Search Anything.." rows="5" class="search-bar"></textarea>
                   <button type="submit" class="btn btn-primary">Search</button>
                 </div>
-                <div id="search-results" style="display: none;"></div>
-              </form> 
+                <div class="results-container"></div>
+              </form>
             <div class="wrapper">
                 <input id="toggler" type="checkbox">
                 <label for="toggler">
@@ -177,8 +177,9 @@
                     <div class="create-post-input">
                       <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
                       <input type="file" id="postImage" accept="images/*" style="display:none;" />
-                      <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
-                      <button type="submit" class="btn btn-primary" id="postButton">Post</button>
+                      <button id="addImageButton" class="btn btn-secondary">Add Picture</button>
+                      <span id="uploadedFileName"></span>
+                      <button id="postButton" type="submit" class="btn btn-primary">Post</button>
                     </div>
                   </form>
                 <div id="postContainer"></div>                          

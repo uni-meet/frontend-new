@@ -1,4 +1,4 @@
-import { getUserInfo } from './src/middleware/user.middleware.js';
+/*import { getUserInfo } from './src/middleware/user.middleware.js';
 import { sharePicture } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
 import { CURRENT_SERVER_API } from './src/middleware/server.middleware.js';
@@ -105,4 +105,84 @@ function addNewPost(username, postDescription, imageUrl) {
   }
 
   addNewPost(userInfo.username, postDescription, imageUrl);
+});*/
+
+import { sharePicture, updatePictureCaption, deletePicture } from './src/middleware/picture.middleware.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const postForm = document.querySelector('.create-post');
+  const postButton = document.getElementById('postButton');
+  const addImageButton = document.getElementById('addImageButton');
+  const postImage = document.getElementById('postImage');
+  const postDescription = document.getElementById('postDescription');
+  const postContainer = document.getElementById('postContainer');
+
+  postForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      userId: 1, // Assuming the user ID is 1, replace this with the actual user ID
+      description: postDescription.value,
+      pictureImage: postImage.files[0],
+    };
+
+    try {
+      const imageUrl = await sharePicture(formData);
+      const postElement = createPostElement(formData.userId, imageUrl, formData.description);
+      postContainer.prepend(postElement);
+    } catch (error) {
+      console.error('Error sharing picture:', error);
+    }
+  });
+
+  addImageButton.addEventListener('click', () => {
+    postImage.click();
+  });
+
+  postImage.addEventListener('change', () => {
+    const fileNameElement = document.getElementById('uploadedFileName');
+    if (postImage.files.length > 0) {
+      fileNameElement.textContent = `Selected file: ${postImage.files[0].name}`;
+    } else {
+      fileNameElement.textContent = '';
+    }
+  });
 });
+
+function createPostElement(pictureId, userId, imageUrl, description) {
+  const postElement = document.createElement('div');
+  postElement.className = 'feed';
+
+  // Add the post HTML structure to the newly created element.
+  // Replace the hardcoded values with actual values from the post data.
+  postElement.innerHTML = `
+    <!-- Add the rest of the post HTML structure here -->
+    <div class="wrapper">
+      <input id="Edit${pictureId}" type="checkbox">
+      <label for="Edit${pictureId}">
+        <i class="fa-solid fa-ellipsis"></i>
+      </label>
+      <div class="dropdown">
+        <a href="#" onclick="testGetUserInfo()">Edit Post</a>
+        <a href="#" onclick="deletePost(${pictureId}, this.closest('.feed'))">Delete Post</a>
+      </div>
+    </div>
+    <div class="photo">
+      <img src="${imageUrl}" >
+    </div>
+    <div class="caption">
+      <p><b>User ${userId}</b>${description}<span class="harsh-tag"> #someHashtag</span></p>
+    </div>
+  `;
+
+  return postElement;
+}
+
+async function deletePost(pictureId, postElement) {
+  try {
+    await deletePicture(pictureId);
+    postElement.remove();
+  } catch (error) {
+    console.error('Error deleting picture:', error);
+  }
+}
