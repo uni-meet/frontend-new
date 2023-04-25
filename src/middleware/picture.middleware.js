@@ -10,30 +10,35 @@ function fileToBase64(file) {
     });
   }
   
-  export async function sharePicture(pictureInfo) {
+export async function sharePicture({ userId, description, pictureImage }) {
+  try {
+    // Create a FormData object
     const formData = new FormData();
-    formData.append("userId", pictureInfo.userId);
-    formData.append("description", pictureInfo.description);
-  
-    // Convert the image file to base64 and append it to formData
-    const base64Image = await fileToBase64(pictureInfo.pictureImage);
-    formData.append("pictureImage", base64Image);
-  
-    return fetch(`${CURRENT_SERVER_API}/api/picture/sharePicture`, {
-      method: "POST",
+    formData.append('userId', userId);
+    formData.append('description', description);
+    formData.append('pictureImage', pictureImage);
+
+    const requestOptions = {
+      method: 'POST',
       headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
+        'Accept': 'application/json',
       },
       body: formData,
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        throw new Error("Sharing picture failed");
-      })
-      .then((data) => {
-        return data.message;
-      });
+    };
+
+    const response = await fetch(`${CURRENT_SERVER_API}/picture/sharePicture`, requestOptions);
+
+    if (!response.ok) {
+      throw new Error("Sharing picture failed");
+    }
+
+    const data = await response.json();
+    return data.imageUrl;
+  } catch (error) {
+    console.error("Error sharing picture:", error);
+    throw error;
   }
+}
 
   export function updatePictureCaption(pictureId, caption) {
     return fetch(CURRENT_SERVER_API + '/picture/updatePictureCaption', {

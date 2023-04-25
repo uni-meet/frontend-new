@@ -276,8 +276,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           </span>
       </div>
       <div class="photo">
-        <img src="${temporary ? "images/loading.gif" : imageUrl}">
-    </div>
+        ${temporary ? '' : `<img src="${imageUrl}">`}
+      </div>
       <div class="action-buttons">
           <div class="interaction-buttons">
               <span><i class="fa-solid fa-heart"></i></span>
