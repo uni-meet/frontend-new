@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const likeButtons = document.querySelectorAll('.interaction-buttons .fa-heart');
   const commentButtons = document.querySelectorAll('.fa-comment-dots');
+  const commentInputs = document.querySelectorAll('.comment-input');
   const postCommentButtons = document.querySelectorAll('.postCommentBtn');
 
   likeButtons.forEach((likeBtn, index) => {
@@ -218,11 +219,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const commentInputWrapper = commentBtn.closest('.feed').querySelector('.comment-input-wrapper');
         commentInputWrapper.style.display = commentInputWrapper.style.display === 'none' ? 'flex' : 'none';
     });
-});
+  });
 
   postCommentButtons.forEach((postCommentBtn, index) => {
     postCommentBtn.addEventListener('click', async () => {
-      const commentInput = document.querySelectorAll('#commentInput')[index];
+      const commentInput = commentInputs[index];
       const text = commentInput.value;
       if (text) {
         // Use index to identify the correct picture ID
