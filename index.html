@@ -11,7 +11,6 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.4.3/typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/3.1.2/jwt-decode.min.js"></script>
 
 </head>
 <body>
@@ -20,13 +19,13 @@
             <h2>
                 UniGram
             </h2>
-            <form id="user-search-form" class="search-bar" onsubmit="return false;">
+            <form class="search-bar">
                 <div class="search-bar-input">
-                  <input type="text" id="search-string" placeholder="Search Anything.." />
+                  <textarea placeholder="Search Anything.." rows="5" class="search-bar"></textarea>
                   <button type="submit" class="btn btn-primary">Search</button>
                 </div>
-                <div id="search-results" style="display: none;"></div>
-              </form> 
+                <div class="results-container"></div>
+              </form>
             <div class="wrapper">
                 <input id="toggler" type="checkbox">
                 <label for="toggler">
@@ -177,8 +176,9 @@
                     <div class="create-post-input">
                       <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
                       <input type="file" id="postImage" accept="images/*" style="display:none;" />
-                      <button type="button" class="btn btn-secondary" id="addImageButton">Add Picture</button>
-                      <button type="submit" class="btn btn-primary" id="postButton">Post</button>
+                      <button id="addImageButton" class="btn btn-secondary">Add Picture</button>
+                      <span id="uploadedFileName"></span>
+                      <button id="postButton" type="submit" class="btn btn-primary">Post</button>
                     </div>
                   </form>
                 <div id="postContainer"></div>                          
@@ -250,7 +250,13 @@
                         <div class="caption">
                             <p><b>User B</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag"> #morning</span></p>
                         </div>
-                    </div>
+                        <div class="comment-input-wrapper" style="display: none;">
+                            <input id="commentInput" type="text" placeholder="Write a comment...">
+                            <button class="postCommentBtn">Post</button>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="feeds">
                     <div class="feed">
                         <div class="head">
                             <div class="user">
@@ -262,15 +268,15 @@
                                 </div>
                             </div>
                             <div class="wrapper">
-                                <input id="Edit1" type="checkbox">
-                                <label for="Edit1">
+                                <input id="Edit" type="checkbox">
+                                <label for="Edit">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </label>
                                 <div class="dropdown">
                                   <a href="" onclick="testGetUserInfo()">Edit Post</a>
                                   <a href="" onclick="testGetUserInfo()">Delete Post</a>
                                 </div>
-                              </div>
+                              </div>                       
                         </div>
                         <div class="photo">
                             <img src="images/afternoon.jpeg" >
@@ -281,14 +287,22 @@
                                 <span><i class="fa-solid fa-comment-dots"></i></span>
                                 <span><i class="fa-solid fa-share-nodes"></i></span>
                             </div>
+                            
                             <div class="bookmark">
                                 <span><i class="fa-solid fa-bookmark"></i></span>
                             </div>
                         </div>
+
                         <div class="caption">
-                            <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#afternoon</span></p>
+                            <p><b>User C</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag"> #afternoon</span></p>
                         </div>
-                    </div>
+                        <div class="comment-input-wrapper" style="display: none;">
+                            <input id="commentInput" type="text" placeholder="Write a comment...">
+                            <button class="postCommentBtn">Post</button>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="feeds">
                     <div class="feed">
                         <div class="head">
                             <div class="user">
@@ -300,15 +314,15 @@
                                 </div>
                             </div>
                             <div class="wrapper">
-                                <input id="Edit2" type="checkbox">
-                                <label for="Edit2">
+                                <input id="Edit" type="checkbox">
+                                <label for="Edit">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </label>
                                 <div class="dropdown">
                                   <a href="" onclick="testGetUserInfo()">Edit Post</a>
                                   <a href="" onclick="testGetUserInfo()">Delete Post</a>
                                 </div>
-                              </div>
+                              </div>                       
                         </div>
                         <div class="photo">
                             <img src="images/night.jpeg" >
@@ -319,18 +333,23 @@
                                 <span><i class="fa-solid fa-comment-dots"></i></span>
                                 <span><i class="fa-solid fa-share-nodes"></i></span>
                             </div>
+                            
                             <div class="bookmark">
                                 <span><i class="fa-solid fa-bookmark"></i></span>
                             </div>
                         </div>
-                        
+
                         <div class="caption">
-                            <p><b>User D</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag">#night</span></p>
+                            <p><b>User E</b>Lorem ipsum dolor sit amet elit.<span class="harsh-tag"> #night</span></p>
                         </div>
-                    </div>
+                        <div class="comment-input-wrapper" style="display: none;">
+                            <input id="commentInput" type="text" placeholder="Write a comment...">
+                            <button class="postCommentBtn">Post</button>
+                          </div>
+                        </div>
+                      </div>
                     
                 </div>
-            </div>
             <!--====================== RIGHT SIDE =================-->
             <div class="right">
                 <div class="messages">

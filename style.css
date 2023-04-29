@@ -169,7 +169,43 @@ img{
     align-self: flex-end;
   }
   
+  .search-container {
+    position: relative;
+    width: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    display: none;
+  }
+  
+  .search-results.visible {
+    display: block;
+  }
+
+  .results-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 50%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 999;
+  }
 
 
 .navbar .create{

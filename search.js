@@ -1,4 +1,4 @@
-import { searchUsers } from "./src/middleware/search.middleware.js";
+/*import { searchUsers } from "./src/middleware/search.middleware.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 const userSearchForm = document.getElementById('user-search-form');
@@ -39,4 +39,54 @@ userSearchForm.addEventListener('submit', (event) => {
       console.error('Error searching users:', error);
     });
 });
+});*/
+
+import { searchUsers } from './src/middleware/search.middleware.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.querySelector('.search-bar');
+    const searchInput = searchForm.querySelector('.search-bar-input textarea');
+  
+    searchForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const searchString = searchInput.value;
+        if (searchString.trim() === '') return;
+        try {
+            const searchResults = await searchUsers(searchString);
+            console.log("Search results:", searchResults);
+            displaySearchResults(searchResults.data);
+        } catch (error) {
+            console.error("Error while searching for \"" + searchString + "\":", error);
+        }
+    });
+
+  async function search(searchTerm) {
+    try {
+      const searchResults = await searchUsers(searchTerm);
+  
+      // Update the search results on the page
+      console.log('Search results:', searchResults);
+      console.log(`Search for "${searchTerm}" was successful.`);
+      displaySearchResults(searchResults.data);
+    } catch (error) {
+      console.error(`Error while searching for "${searchTerm}":`, error);
+    }
+  }
+  
+  function displaySearchResults(results) {
+    const resultsContainer = document.querySelector('.results-container');
+    resultsContainer.innerHTML = '';
+
+    if (results.length === 0) {
+        resultsContainer.innerHTML = '<p>No results found</p>';
+    } else {
+        results.forEach(result => {
+            const resultElement = document.createElement('p');
+            resultElement.textContent = result.username;
+            resultsContainer.appendChild(resultElement);
+        });
+    }
+
+    resultsContainer.style.display = 'block';
+    }
 });

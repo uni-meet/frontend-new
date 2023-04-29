@@ -1,39 +1,40 @@
 
 import { CURRENT_SERVER_API } from "./server.middleware.js";
+  
+export async function sharePicture({ userId, description, pictureImage }) {
+  try {
+    // Create a FormData object
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('description', description);
+    formData.append('image', pictureImage);
 
-export async function sharePicture(pictureInfo) {
-    let formData = new FormData();
-    formData.append('userId', pictureInfo.userId);
-    formData.append('description', pictureInfo.description);
-    formData.append('pictureImage', pictureInfo.pictureImage);
-  
-    console.log(formData);
-  
-    const response = await fetch(CURRENT_SERVER_API + '/picture', {
+    const requestOptions = {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: formData
-    });
-  
-    if (!response.ok) {
-      console.log('Response status:', response.status);
-      console.log('Response status text:', response.statusText);
-      response.text().then(text => console.log('Response text:', text));
-      throw new Error('Sharing picture failed');
-    }
-  
-    const resData = await response.json();
-    console.log('res data');
-    console.log(resData);
-  
-    // Assuming the server returns the new post's details, and it has a field named 'imageUrl'
-    return resData.imageUrl;
-  }
+      body: formData,
+    };
 
-export function updatePictureCaption(pictureId, caption) {
+    const response = await fetch(`${CURRENT_SERVER_API}/picture/sharePicture`, requestOptions);
+
+    if (!response.ok) {
+      throw new Error("Sharing picture failed");
+    }
+
+    const data = await response.json();
+    return {
+      imageUrl: data.imageUrl,
+      pictureId: data.pictureId, // Extract the pictureId from the response
+    };
+  } catch (error) {
+    console.error("Error sharing picture:", error);
+    throw error;
+  }
+}
+
+  export function updatePictureCaption(pictureId, caption) {
     return fetch(CURRENT_SERVER_API + '/picture/updatePictureCaption', {
         method: 'POST',
-        headers: { 'Content-Type': 'multipart/form-data; ', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
             pictureId: pictureId,
             description: caption
@@ -52,7 +53,7 @@ export function updatePictureCaption(pictureId, caption) {
 }
 
 export function deletePicture(pictureId) {
-    return fetch(CURRENT_SERVER_API + '/picture/deletePicture/:pictureId', {
+    return fetch(CURRENT_SERVER_API + '/picture/deletePicture/' + pictureId, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
