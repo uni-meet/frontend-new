@@ -73,6 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
+  document.addEventListener('click', (event) => {
+    const searchResults = document.querySelector('.search-results');
+    const searchBarInput = document.querySelector('.search-bar-input');
+  
+    if (!searchBarInput.contains(event.target) && !searchResults.contains(event.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+
   function displaySearchResults(results) {
     const resultsContainer = document.querySelector('.results-container');
     resultsContainer.innerHTML = '';
