@@ -194,8 +194,47 @@ async function deletePost(pictureId, postElement) {
 
 
 import { getUserInfo } from './src/middleware/user.middleware.js';
-import { sharePicture } from './src/middleware/picture.middleware.js';
+import { sharePicture, deletePicture, updatePictureCaption } from './src/middleware/picture.middleware.js';
 import { getToken } from './src/utils/index.js';
+import { likePicture, commentPicture } from './src/middleware/like_comment_middleware.js';
+
+document.addEventListener('DOMContentLoaded', function() {
+  const userId = 'userId';
+
+  const likeButtons = document.querySelectorAll('.interaction-buttons .fa-heart');
+  const commentButtons = document.querySelectorAll('.fa-comment-dots');
+  const postCommentButtons = document.querySelectorAll('.postCommentBtn');
+
+  likeButtons.forEach((likeBtn, index) => {
+    likeBtn.addEventListener('click', async () => {
+      likeBtn.style.color = likeBtn.style.color === 'red' ? '' : 'red';
+      // Use index to identify the correct picture ID
+      await likePicture(userId, `pictureId${index}`);
+    });
+  });
+
+  commentButtons.forEach((commentBtn) => {
+    commentBtn.addEventListener('click', () => {
+        const commentInputWrapper = commentBtn.closest('.feed').querySelector('.comment-input-wrapper');
+        commentInputWrapper.style.display = commentInputWrapper.style.display === 'none' ? 'flex' : 'none';
+    });
+});
+
+  postCommentButtons.forEach((postCommentBtn, index) => {
+    postCommentBtn.addEventListener('click', async () => {
+      const commentInput = document.querySelectorAll('#commentInput')[index];
+      const text = commentInput.value;
+      if (text) {
+        // Use index to identify the correct picture ID
+        await commentPicture(userId, `pictureId${index}`, text);
+        commentInput.value = '';
+      } else {
+        alert('Please write a comment before posting.');
+      }
+    });
+  });
+});
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const postButton = document.getElementById("postButton");
@@ -237,20 +276,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       description: description,
       pictureImage: pictureImage,
     };
+
   
     // Create a temporary post with a loading indicator
     const temporaryPost = addNewPost(userInfo.username, description, null, true);
   
     try {
-      const imageUrl = await sharePicture(pictureInfo);
-      console.log("Post created successfully");
+        const { imageUrl, pictureId } = await sharePicture(pictureInfo); // Destructure the returned object
+        console.log("Post created successfully");
+        console.log("imageUrl:", imageUrl, "pictureId:", pictureId); // Add this line
   
       // Remove the temporary post
       temporaryPost.remove();
   
       // Add the new post with the actual image URL
-      addNewPost(userInfo.username, description, imageUrl);
-    } catch (error) {
+      addNewPost(userInfo.username, description, imageUrl, pictureId); // Pass the pictureId to the addNewPost function
+  } catch (error) {
       // Remove the temporary post if there's an error
       temporaryPost.remove();
   
@@ -258,7 +299,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-    function addNewPost(username, postDescription, imageUrl, temporary = false) {
+    function addNewPost(username, postDescription, imageUrl, pictureId, temporary = false) {
     const newPost = document.createElement("div");
     newPost.classList.add("feed");
     newPost.innerHTML = `
@@ -275,6 +316,10 @@ document.addEventListener('DOMContentLoaded', async () => {
               <i class="fa-solid fa-ellipsis"></i>
           </span>
       </div>
+      <div class="dropdown">
+      <a href="#" onclick="editPost('${pictureId}')">Edit Post</a>
+      <a href="#" onclick="deletePost('${pictureId}')">Delete Post</a>
+    </div>
       <div class="photo">
         ${temporary ? '' : `<img src="${imageUrl}">`}
       </div>
@@ -299,3 +344,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   return newPost;
 }
 });
+
+
+function editPost(pictureId) {
+    const newCaption = prompt("Please enter the new caption for the post:");
+    if (newCaption) {
+      updatePictureCaption(pictureId, newCaption)
+        .then(() => {
+          alert("Caption updated successfully!");
+          // Update the UI with the new caption
+        })
+        .catch((error) => {
+          console.error("Error updating caption:", error);
+          alert("An error occurred while updating the caption. Please try again.");
+        });
+    }
+  }
+
+  function deletePost(pictureId) {
+    const confirmDelete = confirm("Are you sure you want to delete this post?");
+    if (confirmDelete) {
+      deletePicture(pictureId)
+        .then(() => {
+          alert("Post deleted successfully!");
+          // Remove the post from the UI
+        })
+        .catch((error) => {
+          console.error("Error deleting post:", error);
+          alert("An error occurred while deleting the post. Please try again.");
+        });
+    }
+  }
+
+window.editPost = editPost;
+window.deletePost = deletePost;

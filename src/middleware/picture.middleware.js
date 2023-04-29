@@ -1,14 +1,5 @@
 
 import { CURRENT_SERVER_API } from "./server.middleware.js";
-
-function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  }
   
 export async function sharePicture({ userId, description, pictureImage }) {
   try {
@@ -16,13 +7,10 @@ export async function sharePicture({ userId, description, pictureImage }) {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('description', description);
-    formData.append('pictureImage', pictureImage);
+    formData.append('image', pictureImage);
 
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-      },
       body: formData,
     };
 
@@ -33,7 +21,10 @@ export async function sharePicture({ userId, description, pictureImage }) {
     }
 
     const data = await response.json();
-    return data.imageUrl;
+    return {
+      imageUrl: data.imageUrl,
+      pictureId: data.pictureId, // Extract the pictureId from the response
+    };
   } catch (error) {
     console.error("Error sharing picture:", error);
     throw error;
@@ -62,7 +53,7 @@ export async function sharePicture({ userId, description, pictureImage }) {
 }
 
 export function deletePicture(pictureId) {
-    return fetch(CURRENT_SERVER_API + '/picture/deletePicture/:pictureId', {
+    return fetch(CURRENT_SERVER_API + '/picture/deletePicture/' + pictureId, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
