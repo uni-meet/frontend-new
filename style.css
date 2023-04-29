@@ -448,6 +448,12 @@ main .container .left .profile{
     width: 100%;
   }
   
+  .create-post-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
   .middle .create-post .create-post-input textarea {
     width: 100%;
     padding: 1rem;

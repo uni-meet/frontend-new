@@ -176,11 +176,14 @@
                     <div class="create-post-input">
                       <textarea placeholder="What's on your mind" rows="5" class="create-post" id="postDescription"></textarea>
                       <input type="file" id="postImage" accept="images/*" style="display:none;" />
-                      <button id="addImageButton" class="btn btn-secondary">Add Picture</button>
-                      <span id="uploadedFileName"></span>
-                      <button id="postButton" type="submit" class="btn btn-primary">Post</button>
+                      <div class="create-post-buttons">
+                        <button id="postButton" type="submit" class="btn btn-primary">Post</button>
+                        <button id="addImageButton" class="btn btn-secondary">Add Picture</button>
+                        <span id="uploadedFileName"></span>
+                      </div>
                     </div>
                   </form>
+                  
                 <div id="postContainer"></div>                          
                 <div class="feeds">
                     <div class="feed">
