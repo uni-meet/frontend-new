@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-    function addNewPost(username, postDescription, imageUrl, pictureId, temporary = false) {
+  function addNewPost(username, postDescription, imageUrl, pictureId, temporary = false) {
     const newPost = document.createElement("div");
     newPost.classList.add("feed");
     newPost.innerHTML = `
@@ -313,14 +313,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                   <h3>${username}</h3>
               </div>
           </div>
-          <span class="edit">
-              <i class="fa-solid fa-ellipsis"></i>
-          </span>
+          <div class="wrapper">
+            <input id="Edit" type="checkbox">
+            <label for="Edit">
+                <i class="fa-solid fa-ellipsis"></i>
+            </label>
+            <div class="dropdown">
+              <a href="#" onclick="editPost('${pictureId}')">Edit Post</a>
+              <a href="#" onclick="deletePost('${pictureId}')">Delete Post</a>
+            </div>
+          </div>
       </div>
-      <div class="dropdown">
-      <a href="#" onclick="editPost('${pictureId}')">Edit Post</a>
-      <a href="#" onclick="deletePost('${pictureId}')">Delete Post</a>
-    </div>
       <div class="photo">
         ${temporary ? '' : `<img src="${imageUrl}">`}
       </div>
@@ -336,6 +339,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="caption">
           <p><b>${username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
+      </div>
+      <div class="comment-input-wrapper" style="display: none;">
+          <textarea placeholder="Write a comment..." class="custom-input comment-input"></textarea>
+          <button class="postCommentBtn">Post</button>
       </div>
     `;
   
