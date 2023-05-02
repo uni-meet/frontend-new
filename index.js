@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
       </div>
       <div class="photo">
-        ${temporary ? '' : `<img src="${imageUrl}">`}
+      <img src="${temporary ? 'images/loading.gif' : imageUrl}">
       </div>
       <div class="action-buttons">
           <div class="interaction-buttons">
