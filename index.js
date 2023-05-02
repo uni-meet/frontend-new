@@ -83,21 +83,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       pictureImage: pictureImage,
     };
 
-  
     // Create a temporary post with a loading indicator
     const temporaryPost = addNewPost(userInfo.username, description, null, true);
   
     try {
-        const { imageUrl, pictureId } = await sharePicture(pictureInfo); // Destructure the returned object
-        console.log("Post created successfully");
-        console.log("imageUrl:", imageUrl, "pictureId:", pictureId); // Add this line
+      const { imageUrl, pictureId } = await sharePicture(pictureInfo); // Destructure the returned object
+      console.log("Post created successfully");
+      console.log("imageUrl:", imageUrl, "pictureId:", pictureId); // Add this line
   
       // Remove the temporary post
       temporaryPost.remove();
   
       // Add the new post with the actual image URL
       addNewPost(userInfo.username, description, imageUrl, pictureId); // Pass the pictureId to the addNewPost function
-  } catch (error) {
+    } catch (error) {
       // Remove the temporary post if there's an error
       temporaryPost.remove();
   
@@ -143,17 +142,17 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
       </div>
       <div class="caption">
-          <p><b>${username}</b>${postDescription}<span class="harsh-tag">#afternoon</span></p>
+          <p><b>${username}</b> ${postDescription} <span class="harsh-tag">#afternoon</span></p>
       </div>
       <div class="comment-input-wrapper" style="display: none;">
           <textarea placeholder="Write a comment..." class="custom-input comment-input"></textarea>
           <button class="postCommentBtn">Post</button>
       </div>
     `;
-  
+
     const feedsContainer = document.querySelector(".feeds");
     feedsContainer.appendChild(newPost);
-  
+
     return newPost;
   }
 });
