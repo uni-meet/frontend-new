@@ -14,16 +14,20 @@ export async function sharePicture({ userId, description, pictureImage }) {
       body: formData,
     };
 
-    const response = await fetch(`${CURRENT_SERVER_API}/picture/sharePicture`, requestOptions);
+    const requestUrl = `${CURRENT_SERVER_API}/testUpload`;
+    console.log("Request URL:", requestUrl);
+
+    const response = await fetch(requestUrl, requestOptions);
 
     if (!response.ok) {
       throw new Error("Sharing picture failed");
     }
 
     const data = await response.json();
+    console.log('Data:', data);
     return {
       imageUrl: data.imageUrl,
-      pictureId: data.pictureId, // Extract the pictureId from the response
+      pictureId: null, // We are not returning a pictureId in this test route
     };
   } catch (error) {
     console.error("Error sharing picture:", error);

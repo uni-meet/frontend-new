@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     // Create a temporary post with a loading indicator
-    const temporaryPost = addNewPost(userInfo.username, description, null, true);
+    const temporaryPost = addNewPost(userInfo.username, description, 'images/loading.gif', null, true);
   
     try {
       const { imageUrl, pictureId } = await sharePicture(pictureInfo); // Destructure the returned object
