@@ -14,7 +14,7 @@ export async function sharePicture({ userId, description, pictureImage }) {
       body: formData,
     };
 
-    const requestUrl = `${CURRENT_SERVER_API}/testUpload`;
+    const requestUrl = `${CURRENT_SERVER_API}/picture/sharePicture`;
     console.log("Request URL:", requestUrl);
 
     const response = await fetch(requestUrl, requestOptions);
@@ -24,10 +24,9 @@ export async function sharePicture({ userId, description, pictureImage }) {
     }
 
     const data = await response.json();
-    console.log('Data:', data);
     return {
       imageUrl: data.imageUrl,
-      pictureId: null, // We are not returning a pictureId in this test route
+      pictureId: data.pictureId, // Extract the pictureId from the response
     };
   } catch (error) {
     console.error("Error sharing picture:", error);
