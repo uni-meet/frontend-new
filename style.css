@@ -201,7 +201,7 @@ img{
     position: absolute;
     top: calc(100% + 10px); /* Add 10px space below the search input */
     left: 0;
-    width: 87.5%;
+    width: 90%;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px; /* Decrease border-radius to 5px */

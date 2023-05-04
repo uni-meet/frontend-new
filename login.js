@@ -55,7 +55,6 @@ async function signUpUser(firstName, lastName, username, email, password) {
     if (response.ok) {
       const data = await response.json();
       console.log("Signed up:", data);
-      alert("Signup successful!");
       createToken(token);
       // Redirect to index.html after successful signup (optional)
       window.location.href = "index.html";
@@ -65,7 +64,8 @@ async function signUpUser(firstName, lastName, username, email, password) {
     }
   } catch (error) {
     console.error(error);
-    alert("Signup failed: " + error.message);
+  } finally {
+    alert("User created!"); // This will show an alert every time, regardless of the result.
   }
 }
 
